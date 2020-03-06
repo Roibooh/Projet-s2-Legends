@@ -295,8 +295,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1029480510}
   - component: {fileID: 1029480509}
+  - component: {fileID: 1029480511}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Cube1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -366,3 +367,15 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1029480511
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1029480508}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8134a94fc45c40b43b558e76b7151a12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

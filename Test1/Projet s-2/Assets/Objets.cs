@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Objets
 {
-    public abstract class Objets : MonoBehaviour
+    public abstract class Objets
     {
-        protected Vector3 position;
+        protected internal Vector3 position;
 
         public Vector3 Position
         {
@@ -14,10 +14,9 @@ namespace Objets
             private set => position = value;
         }
 
-        public Objets()
+        public Objets(Vector3 position)
         {
-            position = transform.position;
-            
+            this.position = position;
         }
         
     }

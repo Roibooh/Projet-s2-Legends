@@ -58,6 +58,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Attaques.cs" />
+     <Compile Include="Assets\Joueur.cs" />
      <Compile Include="Assets\Objets.cs" />
      <Compile Include="Assets\ObjetsMovibles.cs" />
      <Compile Include="Assets\ObjetsStatiques.cs" />

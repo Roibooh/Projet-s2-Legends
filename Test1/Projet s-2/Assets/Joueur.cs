@@ -32,7 +32,7 @@ namespace Objets
         #endregion
         
         
-        #region Constructor
+        #region Constructeur
 
         public Joueur(string nom, int pv, int force, float poids, Vector3 position) : base(position, poids)
         {
@@ -52,14 +52,9 @@ namespace Objets
             Pv -= degats;
         }
 
-        protected internal void attaque(Joueur cible/*, Attaque attaque*/ ) //TODO faire les attaques
+        protected internal void Attaque(Joueur cible, Attaque nomattaque ) //TODO faire les attaques
         {
-            cible.estAttaque(/* attaque.degats * */ force);//TODO 
-            //attaque.direction //TODO
-            if (cible.position.x - this.position.x > 0)
-            {
-                
-            }
+            nomattaque.hit(cible);
         }
         
         #endregion

@@ -19,7 +19,6 @@ namespace Objets
         {
             this.position = position;
         }
-        
         #endregion
     }
     

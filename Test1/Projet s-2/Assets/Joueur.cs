@@ -9,7 +9,6 @@ namespace Objets
         private string nom;
         private int pv;
         private int pvMax;
-        private int force;//potentielment useless a cause de la force des attaques
         private bool isAlive;
 
         public int Pv
@@ -34,13 +33,12 @@ namespace Objets
         
         #region Constructeur
 
-        public Joueur(string nom, int pv, int force, float poids, Vector3 position) : base(position, poids)
+        public Joueur(string nom, int pv, float poids, Vector3 position) : base(position, poids)
         {
             this.isAlive = true;
             this.nom = nom;
             this.pv = pv;
             this.pvMax = pv;
-            this.force = force;
         }
         
         #endregion

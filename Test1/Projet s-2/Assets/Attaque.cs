@@ -8,7 +8,6 @@ namespace Objets
 
         private int directionProjection; //multipli a la force de l'attaque
         private int degatsAttaque;
-        private int forceJoueur;
 
         #endregion
 
@@ -18,7 +17,6 @@ namespace Objets
         {
             this.degatsAttaque = degatsAttaque;
             this.directionProjection = directionProjection;
-            this.forceJoueur = forceJoueur;
         }
 
         #endregion
@@ -27,7 +25,7 @@ namespace Objets
 
         protected internal void hit(Joueur cible)
         {
-            cible.estAttaque(this.degatsAttaque * this.forceJoueur);
+            cible.estAttaque(this.degatsAttaque);
         }
 
         #endregion

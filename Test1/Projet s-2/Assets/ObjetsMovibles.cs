@@ -17,34 +17,42 @@ namespace Objets
         }
         #endregion
         #region Constructeur
-        public ObjetsMovibles(Vector3 position, float poids, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position)
+        public ObjetsMovibles(Vector3 position, float masse, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position)
         {
             this.vitesse = new Vector2(vitesseX,vitesseY);
             this.acceleration = new Vector2(accelerationX, accelerationY);
-            this.masse = poids;
+            this.masse = masse;
         }
         #endregion
         #region Methodes
+        
+        protected internal void ChgAccel(float x = 0,float y = 0)
+        {
+            acceleration += new Vector2(x/masse,y/masse);
+        }
+        
         protected internal void Deplace() //Deplace de X et Y
         {
             position.x += vitesse.x;
             position.y += vitesse.y;
         }
 
-        protected internal void ChgAccel(float x,float y)
-        {
-            acceleration += new Vector2(x/masse,y/masse);
-        }
-
         protected internal void Tombe()
         {
-            acceleration.y -= masse * (float)0.1;
+            vitesse.y -= masse * (float) 0.05;
         }
 
         protected internal void Accelere()//applique acceleration
         {
             vitesse.x += acceleration.x;
             vitesse.y += acceleration.y;
+        }
+
+        protected internal void UpdateObjetMovible()
+        {
+            Tombe();
+            Accelere();
+            Deplace();
         }
         #endregion
     }

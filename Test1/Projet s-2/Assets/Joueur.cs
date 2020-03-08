@@ -29,11 +29,10 @@ namespace Objets
         }
 
         #endregion
-        
-        
+
         #region Constructeur
 
-        public Joueur(string nom, int pv, float poids, Vector3 position) : base(position, poids)
+        public Joueur(string nom, int pv, float masse, Vector3 position) : base(position, masse)
         {
             this.isAlive = true;
             this.nom = nom;
@@ -54,7 +53,11 @@ namespace Objets
         {
             nomattaque.hit(cible);
         }
-        
+
+        protected internal void updateJoueur()
+        {
+            this.UpdateObjetMovible();
+        }
         #endregion
     }
 }

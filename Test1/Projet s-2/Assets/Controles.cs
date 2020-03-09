@@ -15,7 +15,7 @@ namespace Objets
         // Start is called before the first frame update
         void Start()
         {
-            j = new Joueur("test",100,1,transform.position);
+            j = new Joueur("test",100,transform.position,20,20,1);
             upKeyAlreadyPressed = false;
             leftKeyAlreadyPressed = false;
             rigthKeyAlreadyPressed = false;

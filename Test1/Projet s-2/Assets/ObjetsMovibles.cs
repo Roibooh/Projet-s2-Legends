@@ -52,7 +52,7 @@ namespace Objets
         }
        
         private Vector2 acceleration;
-        private float masse;
+        protected internal float masse;
         /*public Vector2 Acceleration
         {
             get => acceleration;
@@ -62,7 +62,7 @@ namespace Objets
         #endregion
         
         #region Constructeur
-        public ObjetsMovibles(Vector3 position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitessemax = (float)0.1, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position,demiHauteur,demiLargeur)
+        public ObjetsMovibles(Vector3 position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitessemax = (float)0.2, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position,demiHauteur,demiLargeur)
         {
             this.vitesse = new Vector2(vitesseX,vitesseY);
             this.acceleration = new Vector2(accelerationX, accelerationY);
@@ -92,6 +92,11 @@ namespace Objets
         protected internal void Accelere()//applique acceleration
         {
             Vitesse = new Vector2(vitesse.x + acceleration.x,vitesse.y + acceleration.y);
+        }
+
+        protected internal void Knockback(float forceKBx,float forceKBy,int direction) // -1 :gauche 1 :droite
+        {
+            this.Vitesse = new Vector2(this.Vitesse.x + forceKBx * direction / this.masse, this.Vitesse.y + forceKBy / this.masse);
         }
         
         protected internal void Collision(Objets obj2)

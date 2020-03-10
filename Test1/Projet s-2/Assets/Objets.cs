@@ -30,13 +30,13 @@ namespace Objets
 
         protected internal bool CollisionX(Objets obj2)
         {
-            return ((this.position.x + this.demiLargeur > obj2.position.x - obj2.demiLargeur ) &&
-                    (this.position.x - this.demiLargeur < obj2.position.x + obj2.demiLargeur ));
+            return ((this.position.x + this.demiLargeur >= obj2.position.x - obj2.demiLargeur ) &&
+                    (this.position.x - this.demiLargeur <= obj2.position.x + obj2.demiLargeur ));
         }
         protected internal bool CollisionY(Objets obj2)
         {
-            return ((this.position.y + this.demiHauteur > obj2.position.y - obj2.demiHauteur ) &&
-                    (this.position.y - this.demiHauteur < obj2.position.y + obj2.demiHauteur ));
+            return ((this.position.y + this.demiHauteur >= obj2.position.y - obj2.demiHauteur ) &&
+                    (this.position.y - this.demiHauteur <= obj2.position.y + obj2.demiHauteur ));
         }
 
         protected internal void Collision(Objets obj2)

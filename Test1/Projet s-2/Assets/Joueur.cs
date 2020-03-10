@@ -10,7 +10,8 @@ namespace Objets
         private int pv;
         private int pvMax;
         private bool isAlive;
-
+        protected internal int nbSauts;
+        protected internal int nbSautsMax;
         public int Pv
         {
             get => pv;
@@ -32,12 +33,14 @@ namespace Objets
 
         #region Constructeur
 
-        public Joueur(string nom, int pv,Vector3 position, float demiHauteur, float demiLargeur, int masse) : base(position, demiHauteur,demiLargeur,masse)
+        public Joueur(string nom, int pv,Vector3 position, float demiHauteur, float demiLargeur, int masse, int nbSauts = 1) : base(position, demiHauteur,demiLargeur,masse)
         {
             this.isAlive = true;
             this.nom = nom;
             this.pv = pv;
             this.pvMax = pv;
+            this.nbSauts = nbSauts;
+            this.nbSautsMax = nbSauts;
         }
         
         #endregion

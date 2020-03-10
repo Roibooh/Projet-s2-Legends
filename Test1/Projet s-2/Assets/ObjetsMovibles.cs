@@ -11,7 +11,7 @@ namespace Objets
         public Vector2 Vitesse
         {
             get => vitesse;
-            private set 
+            protected internal set 
             {
                 
                 if (value.x >= this.vitessemax)
@@ -52,12 +52,12 @@ namespace Objets
         
         private Vector2 acceleration;
         private float masse;
-        public Vector2 Acceleration
+        /*public Vector2 Acceleration
         {
             get => acceleration;
             private set => acceleration = 
                 new Vector2(value.x/masse,value.y/masse);
-        }
+        }*/
         #endregion
         
         #region Constructeur
@@ -85,7 +85,7 @@ namespace Objets
 
         protected internal void Tombe()
         {
-            Vitesse = new Vector2(0, vitesse.y - (float)0.005);
+            Vitesse = new Vector2(vitesse.x, vitesse.y - (float)0.005);
         }
 
         protected internal void Accelere()//applique acceleration

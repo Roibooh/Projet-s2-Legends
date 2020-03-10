@@ -10,6 +10,7 @@ namespace Objets
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
+        private float unite = (float)1;//move speed de joueur a importer TODO
         
         private Joueur j;
         // Start is called before the first frame update
@@ -29,7 +30,7 @@ namespace Objets
             {
                 if (!upKeyAlreadyPressed)
                 {
-                    j.ChgAccel(0,(float)0.01);
+                    j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y+unite);
                     upKeyAlreadyPressed = true;
                 }
             } 
@@ -37,10 +38,63 @@ namespace Objets
             {
                 if (upKeyAlreadyPressed)
                 {
-                    j.ChgAccel(0,(float)-0.01);
+                    j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y-unite);
                     upKeyAlreadyPressed = false;
                 }
-            } //pour 1 ctrl..
+
+            } //haut
+            
+            if (Input.GetKey("down"))
+            {
+                if (!downKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y-unite);
+                    downKeyAlreadyPressed = true;
+                }
+            }
+            else
+            {
+                if (downKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y + unite);
+                    downKeyAlreadyPressed = false;
+                }
+            }//bas
+            
+            if (Input.GetKey("right"))
+            {
+                if (!rigthKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x + unite, j.Vitesse.y);
+                    rigthKeyAlreadyPressed = true;
+                }
+            }
+            else
+            {
+                if (rigthKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x-unite, j.Vitesse.y);
+                    rigthKeyAlreadyPressed = false;
+                }
+            }//droite
+            
+            if (Input.GetKey("left"))
+            {
+                if (!leftKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x - unite, j.Vitesse.y);
+                    leftKeyAlreadyPressed = true;
+                }
+            }
+            else
+            {
+                if (leftKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x+unite, j.Vitesse.y);
+                    leftKeyAlreadyPressed = false;
+                }
+            }//gauche
+
             transform.position = j.UpdatePositionJoueur();
             
         }

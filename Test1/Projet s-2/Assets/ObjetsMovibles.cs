@@ -11,32 +11,42 @@ namespace Objets
         public Vector2 Vitesse
         {
             get => vitesse;
-            private set
+            private set 
             {
+                
                 if (value.x >= this.vitessemax)
                 {
-                    this.acceleration.x = 0;
                     this.vitesse.x = this.vitessemax;
+                    this.acceleration.x = 0;
+                    
                 }
-                /*
+                
                 else if (value.x <= -vitessemax)
                 {
                     vitesse.x = -vitessemax;
                     acceleration.x = 0;
-                }*/
+                }
+                else
+                {
+                    vitesse.x = value.x;
+                }
 
                 if (value.y >= this.vitessemax)
                 {
-                    this.acceleration.y = 0;
                     this.vitesse.y = this.vitessemax;
+                    this.acceleration.y = 0;
                 }
-/*
+
                 else if (value.y <= -vitessemax)
                 {
                     vitesse.y = -vitessemax;
                     acceleration.y = 0;
                 }
-                */
+                else
+                {
+                    this.vitesse.y = value.y;
+                }
+                
             }
         }
         
@@ -49,6 +59,7 @@ namespace Objets
                 new Vector2(value.x/masse,value.y/masse);
         }
         #endregion
+        
         #region Constructeur
         public ObjetsMovibles(Vector3 position, float hauteur,float largeur, float masse, float vitessemax = (float)0.5, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position,hauteur,largeur)
         {
@@ -58,6 +69,7 @@ namespace Objets
             this.vitessemax = vitessemax;
         }
         #endregion
+        
         #region Methodes
         
         protected internal void ChgAccel(float x = 0,float y = 0)

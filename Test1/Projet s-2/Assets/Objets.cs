@@ -9,8 +9,8 @@ namespace Objets
     {
         #region Attributs
         protected internal Vector3 position;
-        private float demiHauteur;
-        private float demiLargeur;
+        protected internal float demiHauteur;
+        protected internal float demiLargeur;
         public Vector3 Position
         {
             get => position;

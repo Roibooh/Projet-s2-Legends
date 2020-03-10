@@ -54,9 +54,9 @@ namespace Objets
             nomattaque.hit(cible);
         }
 
-        protected internal void updateJoueur()
+        protected internal Vector2 UpdatePositionJoueur()
         {
-            this.UpdateObjetMovible();
+            return this.UpdatePositionObjetMovible();
         }
         #endregion
     }

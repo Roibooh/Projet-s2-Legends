@@ -21,7 +21,7 @@ namespace Objets
         public Objets(Vector3 position, float hauteur,float largeur)
         {
             this.position = position;
-            this.largeur = largeur;
+            this.largeur = largeur;// changer largeur et hauteur par demi hauteur et demi largeur
             this.hauteur = hauteur;
         }
         #endregion

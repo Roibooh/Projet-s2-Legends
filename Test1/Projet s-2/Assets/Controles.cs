@@ -41,8 +41,8 @@ namespace Objets
                     upKeyAlreadyPressed = false;
                 }
             } //pour 1 ctrl..
+            transform.position = j.UpdatePositionJoueur();
             
-            j.updateJoueur();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿namespace Objets
-{
-    public abstract class ObjetsStatiques 
-    {
-        
-    }
-}
+   {
+       public abstract class ObjetsStatiques 
+       {
+           
+       }
+   }

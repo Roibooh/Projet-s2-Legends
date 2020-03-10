@@ -55,15 +55,15 @@ namespace Objets
             }
             if (Input.GetKey("s")) //bas
             {
+                if (j.Vitesse.y < 0)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
+                }
                 if (!downKeyAlreadyPressed) // accroupi and fastfall
                 {
                     j.demiHauteur /= 2;
                     j.position.y -= j.demiHauteur;
                     transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y/2);
-                    if (j.Vitesse.y < 0)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
-                    }
                     downKeyAlreadyPressed = true;
                 }
             }

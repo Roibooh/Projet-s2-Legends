@@ -12,6 +12,7 @@ namespace Objets
         private bool downKeyAlreadyPressed;
         private float unite = (float)0.15;//move speed de joueur a importer TODO
         private Joueur j;
+        
         // Start is called before the first frame update
         void Start()
         {
@@ -29,8 +30,10 @@ namespace Objets
             ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
             if (Input.GetKey("e"))
             {
-                j.Knockback((float)0.1, (float)0.05,1);
+                j.Knockback((float) 0.1, (float) 0.05, 1);
             }
+
+
             if (Input.GetKey("up") && j.nbSauts > 0)// haut
             {
                 if (!upKeyAlreadyPressed)
@@ -53,16 +56,18 @@ namespace Objets
                 }
             }
             if (Input.GetKey("down")) //bas
+            
             {
+                if (j.Vitesse.y < 0)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
+                }
                 if (!downKeyAlreadyPressed) // accroupi and fastfall
                 {
                     j.demiHauteur /= 2;
                     j.position.y -= j.demiHauteur;
                     transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y/2);
-                    if (j.Vitesse.y < 0)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
-                    }
+                    
                     downKeyAlreadyPressed = true;
                 }
             }

@@ -6,8 +6,9 @@ namespace Objets
     public  class ObjetsMovibles : Objets
     {
         #region Attributs
-        private Vector2 vitesse;
         private float vitessemax;
+        
+        private Vector2 vitesse;
         public Vector2 Vitesse
         {
             get => vitesse;
@@ -49,7 +50,7 @@ namespace Objets
                 
             }
         }
-        
+       
         private Vector2 acceleration;
         private float masse;
         /*public Vector2 Acceleration

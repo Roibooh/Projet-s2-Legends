@@ -61,7 +61,7 @@ namespace Objets
         #endregion
         
         #region Constructeur
-        public ObjetsMovibles(Vector3 position, float hauteur,float largeur, float masse, float vitessemax = (float)0.5, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position,hauteur,largeur)
+        public ObjetsMovibles(Vector3 position, float demiHauteur,float demiLargeur, float masse, float vitessemax = (float)0.5, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position,demiHauteur,demiLargeur)
         {
             this.vitesse = new Vector2(vitesseX,vitesseY);
             this.acceleration = new Vector2(accelerationX, accelerationY);

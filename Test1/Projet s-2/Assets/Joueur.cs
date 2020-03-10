@@ -32,7 +32,7 @@ namespace Objets
 
         #region Constructeur
 
-        public Joueur(string nom, int pv,Vector3 position, float hauteur, float largeur, int masse) : base(position, hauteur,largeur,masse)
+        public Joueur(string nom, int pv,Vector3 position, float demiHauteur, float demiLargeur, int masse) : base(position, demiHauteur,demiLargeur,masse)
         {
             this.isAlive = true;
             this.nom = nom;

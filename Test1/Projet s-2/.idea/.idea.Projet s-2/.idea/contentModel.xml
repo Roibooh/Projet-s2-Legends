@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Admin\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Admin\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Projet s-2.1907057915.00" t="ExcludeRecursive" />
-    <e p="D:\Utilisateurs\Admin\Documents\GitHub\Projet-s2\Test1\Projet s-2" t="IncludeRecursive">
+    <e p="C:\Users\aleti\.Rider2019.2\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\aleti\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Projet s-2.-759940933.00" t="ExcludeRecursive" />
+    <e p="C:\Users\aleti\Desktop\Sallam\Projet-s2\Test1\Projet s-2" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Attaque.cs" t="Include" />
         <e p="Controles.cs" t="Include" />
         <e p="Controles2.cs" t="Include" />
+        <e p="HUD" t="Include">
+          <e p="BarScript.cs" t="Include" />
+          <e p="CountdownController.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+          <e p="Player2.cs" t="Include" />
+          <e p="Stat.cs" t="Include" />
+        </e>
         <e p="Joueur.cs" t="Include" />
         <e p="Objets.cs" t="Include" />
         <e p="ObjetsMovibles.cs" t="Include" />

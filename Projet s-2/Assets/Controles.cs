@@ -10,7 +10,7 @@ namespace Objets
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
-        private float unite = (float)0.15;//move speed de joueur a importer TODO
+        private float unite = (float)0.2;//move speed de joueur a importer TODO
         private Joueur j;
         
         // Start is called before the first frame update
@@ -24,7 +24,7 @@ namespace Objets
         }
 
         // Update is called once per frame
-        void Update()
+        void FixedUpdate()
         {
             Vector3 e = new Vector3(0,(float)-0.5,0);
             ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);

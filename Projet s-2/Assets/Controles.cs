@@ -10,7 +10,7 @@ namespace Objets
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
-        private float unite = (float)0.2;//move speed de joueur a importer TODO
+        private float unite = (float)0.45;//move speed de joueur a importer TODO
         private Joueur j;
         
         // Start is called before the first frame update
@@ -98,6 +98,7 @@ namespace Objets
                     rigthKeyAlreadyPressed = false;
                 }
             }
+            
             if (Input.GetKey("left"))//gauche
             {
                 if (!leftKeyAlreadyPressed)

@@ -62,7 +62,7 @@ namespace Objets
         #endregion
         
         #region Constructeur
-        public ObjetsMovibles(Vector3 position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitessemax = (float)0.2, float vitesseX = 0, float vitesseY = 0, float accelerationX = 0, float accelerationY = 0):base(position,demiHauteur,demiLargeur)
+        public ObjetsMovibles(Vector3 position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitesseX = 0, float vitesseY = 0, float vitessemax = (float) 0.6,float accelerationX = 0, float accelerationY = 0):base(position,demiHauteur,demiLargeur)
         {
             this.vitesse = new Vector2(vitesseX,vitesseY);
             this.acceleration = new Vector2(accelerationX, accelerationY);
@@ -86,7 +86,7 @@ namespace Objets
 
         protected internal void Tombe()
         {
-            Vitesse = new Vector2(vitesse.x, vitesse.y - (float)0.0005*masse);
+            Vitesse = new Vector2(vitesse.x, vitesse.y - (float)0.005*masse);
         }
 
         protected internal void Accelere()//applique acceleration

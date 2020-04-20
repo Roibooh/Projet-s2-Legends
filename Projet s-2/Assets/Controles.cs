@@ -6,17 +6,23 @@ namespace Objets
 {
     public class Controles : MonoBehaviour
     {
+        [SerializeField] private string nom = "Test";
+        [SerializeField] private int pv = 100;
+        [SerializeField] private int demiHauteur = 1;
+        [SerializeField] private int demiLargeur = 1;
+        [SerializeField] private int masse = 3;
+        [SerializeField] private int nbSauts = 3;
+        [SerializeField] private float unite = (float)0.45;// mvspd perso
         private bool upKeyAlreadyPressed;
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
-        private float unite = (float)0.45;//move speed de joueur a importer TODO
         private Joueur j;
         
         // Start is called before the first frame update
         void Start()
         {
-            j = new Joueur("test",100,transform.position,1,1,3,3);
+            j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,nbSauts);
             upKeyAlreadyPressed = false; 
             leftKeyAlreadyPressed = false;
             rigthKeyAlreadyPressed = false;

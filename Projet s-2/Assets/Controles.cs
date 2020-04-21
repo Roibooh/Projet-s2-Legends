@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace Objets
@@ -13,33 +15,41 @@ namespace Objets
         [SerializeField] private int masse = 3;
         [SerializeField] private int nbSauts = 3;
         [SerializeField] private float unite = (float)0.45;// mvspd perso
+        private int direction = 180; // 1 = droite
         private bool upKeyAlreadyPressed;
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
-        private Joueur j;
-        
-        // Start is called before the first frame update
+        protected internal Joueur j;
+        private Animator anim;
+        protected internal enum Etat
+         {
+              Attacking, 
+              Crouch, 
+              Normal,
+              Invincible,
+              Stunt
+         }
+         //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
+         // Start is called before the first frame update
         void Start()
         {
+            anim = GetComponent<Animator>(); 
             j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,nbSauts);
             upKeyAlreadyPressed = false; 
             leftKeyAlreadyPressed = false;
             rigthKeyAlreadyPressed = false;
             downKeyAlreadyPressed = false;
         }
-
         // Update is called once per frame
         void FixedUpdate()
-        {/*
+        {
             Vector3 e = new Vector3(0,(float)-0.5,0);
             ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
             if (Input.GetKey("e"))
             {
-                j.Knockback((float) 0.1, (float) 0.05, 1);
-            }
-
-
+                anim.Play("Hit");
+            } 
             if (Input.GetKey("up") && j.nbSauts > 0)// haut
             {
                 if (!upKeyAlreadyPressed)
@@ -56,13 +66,12 @@ namespace Objets
                     upKeyAlreadyPressed = false;
                 }
 
-                if (j.CollisionY(o))
+                if (j.position.y <= demiHauteur)
                 {
                     j.nbSauts = j.nbSautsMax;
                 }
             }
             if (Input.GetKey("down")) //bas
-            
             {
                 if (j.Vitesse.y < 0)
                 {
@@ -73,13 +82,12 @@ namespace Objets
                     j.demiHauteur /= 2;
                     j.position.y -= j.demiHauteur;
                     transform.localScale = new Vector3(transform.localScale.x,transform.localScale.y/2);
-                    
                     downKeyAlreadyPressed = true;
                 }
             }
             else
             {
-                if (downKeyAlreadyPressed)
+                if (downKeyAlreadyPressed)// Reprendre forme normale
                 {
                     j.position.y += j.demiHauteur;
                     j.demiHauteur *= 2;
@@ -94,6 +102,11 @@ namespace Objets
                 {
                     j.Vitesse = new Vector2(j.Vitesse.x + unite, j.Vitesse.y);
                     rigthKeyAlreadyPressed = true;
+                    if (direction == 180)
+                    {
+                        direction = 0;
+                        this.transform.localRotation = new Quaternion(0,direction,0,0);
+                    }
                 }
             }
             else
@@ -104,13 +117,17 @@ namespace Objets
                     rigthKeyAlreadyPressed = false;
                 }
             }
-            
             if (Input.GetKey("left"))//gauche
             {
                 if (!leftKeyAlreadyPressed)
                 {
                     j.Vitesse = new Vector2(j.Vitesse.x - unite, j.Vitesse.y);
                     leftKeyAlreadyPressed = true;
+                    if (direction == 0)
+                    {
+                        direction = 180;
+                        this.transform.localRotation = new Quaternion(0,direction,0,0);
+                    }
                 }
             }
             else
@@ -121,8 +138,9 @@ namespace Objets
                     leftKeyAlreadyPressed = false;
                 }
             }
+            
             transform.position = j.UpdatePositionJoueur();
-            j.Collision(o);*/
+            //ObjetsMovibles j1 = new Joueur("k",100,Joueur1.position,1,1,1,2); test 
         }
     }
 }

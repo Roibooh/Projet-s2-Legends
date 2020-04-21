@@ -18,7 +18,7 @@ namespace Objets
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
-        private Joueur j;
+        protected internal Joueur j;
             protected internal enum Etat
          {
               Attacking, 
@@ -40,6 +40,10 @@ namespace Objets
         // Update is called once per frame
         void FixedUpdate()
         {
+            if (!j.isAlive)
+            {
+                gameObject.SetActive(false);
+            }
             Vector3 e = new Vector3(0,(float)-0.5,0);
             ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
             

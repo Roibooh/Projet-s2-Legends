@@ -7,9 +7,9 @@ namespace Objets
         #region Attributs
         
         private string nom;
-        private int pv;
+        public int pv;
         private int pvMax;
-        private bool isAlive;
+        protected internal bool isAlive;
         protected internal int nbSauts;
         protected internal int nbSautsMax;
         public int Pv
@@ -25,6 +25,10 @@ namespace Objets
                 {
                     pv = 0;
                     isAlive = false;
+                }
+                else
+                {
+                    pv = value;
                 }
             }
         }

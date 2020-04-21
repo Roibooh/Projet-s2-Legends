@@ -31,7 +31,7 @@ namespace Objets
 
         // Update is called once per frame
         void FixedUpdate()
-        {
+        {/*
             Vector3 e = new Vector3(0,(float)-0.5,0);
             ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
             if (Input.GetKey("e"))
@@ -122,7 +122,7 @@ namespace Objets
                 }
             }
             transform.position = j.UpdatePositionJoueur();
-            j.Collision(o);
+            j.Collision(o);*/
         }
     }
 }

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PixelRect:
     serializedVersion: 2
-    x: 8
-    y: 108
+    x: -84
+    y: 189
     width: 1904
     height: 902
   m_ShowMode: 4
@@ -320,8 +320,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 719
+    x: 0
+    y: 600
     width: 1492
     height: 250
   m_ViewDataDictionary: {fileID: 0}
@@ -344,7 +344,7 @@ MonoBehaviour:
   m_LastFolders:
   - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Julien\Projet-s2\Projet s-2
+  m_LastProjectPath: D:\Fichier imp\Info\C#\Projet-s2\Projet s-2
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -456,8 +456,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 1501
-    y: 138
+    x: 1494
+    y: 19
     width: 410
     height: 831
   m_ViewDataDictionary: {fileID: 0}
@@ -494,17 +494,17 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 8
-    y: 138
+    x: 0
+    y: 19
     width: 253
     height: 560
   m_ViewDataDictionary: {fileID: 0}
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
-      m_LastClickedID: 0
-      m_ExpandedIDs: 62fbffff
+      m_SelectedIDs: 26340000
+      m_LastClickedID: 13350
+      m_ExpandedIDs: 60fbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -549,8 +549,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 262
-    y: 138
+    x: 255
+    y: 19
     width: 1237
     height: 560
   m_ViewDataDictionary: {fileID: 0}
@@ -564,9 +564,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.5028217, y: 10.274738, z: -28.909094}
+    m_Target: {x: 1.1012771, y: 10.371759, z: -31.061966}
     speed: 2
-    m_Value: {x: 0.5028217, y: 10.274738, z: -28.909094}
+    m_Value: {x: 1.1012771, y: 10.371759, z: -31.061966}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -616,9 +616,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 79.296394
+    m_Target: 52.39427
     speed: 2
-    m_Value: 79.296394
+    m_Value: 52.39427
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -664,8 +664,8 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
-    x: 262
-    y: 138
+    x: 342
+    y: 61
     width: 1237
     height: 560
   m_ViewDataDictionary: {fileID: 0}

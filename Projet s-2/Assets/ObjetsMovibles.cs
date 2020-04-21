@@ -62,7 +62,7 @@ namespace Objets
         #endregion
         
         #region Constructeur
-        public ObjetsMovibles(Vector3 position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitesseX = 0, float vitesseY = 0, float vitessemax = (float) 0.6,float accelerationX = 0, float accelerationY = 0):base(position,demiHauteur,demiLargeur)
+        public ObjetsMovibles(Vector3 Position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitesseX = 0, float vitesseY = 0, float vitessemax = (float) 0.6,float accelerationX = 0, float accelerationY = 0):base(Position,demiHauteur,demiLargeur)
         {
             this.vitesse = new Vector2(vitesseX,vitesseY);
             this.acceleration = new Vector2(accelerationX, accelerationY);
@@ -80,8 +80,8 @@ namespace Objets
         
         protected internal void Deplace() //Deplace de X et Y
         {
-            position.x += vitesse.x;
-            position.y += vitesse.y;
+            Position = new Vector3(position.x + vitesse.x, position.y, position.z);
+            position=  new Vector3(position.x, position.y+ vitesse.y, position.z);
         }
 
         protected internal void Tombe()
@@ -99,36 +99,37 @@ namespace Objets
             this.Vitesse = new Vector2(this.Vitesse.x + forceKBx * direction / this.masse, this.Vitesse.y + forceKBy / this.masse);
         }
         
+        /*
         protected internal void Collision(Objets obj2)
         {
             if (CollisionX(obj2)&&CollisionY(obj2))
             {
                 if (obj2.position.x - obj2.demiLargeur- this.position.x + this.demiLargeur >= 0)// check gauche
                 {
-                    this.position.x = obj2.position.x - this.demiLargeur - obj2.demiLargeur;
+                    this.Position = new Vector3(obj2.position.x - this.demiLargeur - obj2.demiLargeur, position.y,position.z);
                     this.vitesse.x = 0;
                     this.acceleration.x = 0;
                 }
                 else if (obj2.position.x + obj2.demiLargeur - this.position.x + this.demiLargeur < 0)// check droit
                 {
-                    this.position.x = obj2.position.x + this.demiLargeur + obj2.demiLargeur;
+                    this.Position = new Vector3(obj2.position.x + this.demiLargeur + obj2.demiLargeur,position.y,position.z);
                     this.vitesse.x = 0;
                     this.acceleration.x = 0;
                 }
                 if (obj2.position.y - obj2.demiHauteur - this.position.y + this.demiHauteur >= 0) // check bas 
                 {
-                    this.position.y = obj2.position.y - obj2.demiHauteur - this.demiHauteur;
+                    this.Position = new Vector3(position.x,obj2.position.y - obj2.demiHauteur - this.demiHauteur,position.z);
                     this.vitesse.y = 0;
                     this.acceleration.y = 0;
                 }
                 else if (obj2.position.y + obj2.demiHauteur - this.position.y - this.demiHauteur < 0) // check haut
                 {
-                    this.position.y = obj2.demiHauteur + obj2.position.y + this.demiHauteur;
+                    this.Position = new Vector3(position.x,obj2.demiHauteur + obj2.position.y + this.demiHauteur,position.z);
                     this.vitesse.y = 0;
                     this.acceleration.y = 0;
                 }
             }
-        }
+        }*/
 
         protected internal Vector2 UpdatePositionObjetMovible()
         {

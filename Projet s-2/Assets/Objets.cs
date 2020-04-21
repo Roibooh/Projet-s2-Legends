@@ -11,12 +11,20 @@ namespace Objets
         protected internal Vector3 position;
         protected internal float demiHauteur;
         protected internal float demiLargeur;
-        public Vector3 Position
+        protected internal Vector3 Position
         {
-            get => position;
-            private set => position = value;
+            set
+            {
+                position = value;
+                if (position.y - demiHauteur < 0)
+                {
+                    position = new Vector3(position.x,demiHauteur,position.z);
+                }
+                
+            }
         }
         #endregion
+        
         #region Constructeur
         public Objets(Vector3 position, float demiHauteur,float demiLargeur)
         {
@@ -27,7 +35,7 @@ namespace Objets
         #endregion
 
         #region Methodes
-
+        /*
         protected internal bool CollisionX(Objets obj2)
         {
             return ((this.position.x + this.demiLargeur >= obj2.position.x - obj2.demiLargeur ) &&
@@ -60,7 +68,7 @@ namespace Objets
                     this.position.y = obj2.demiHauteur + obj2.position.y + this.demiHauteur;
                 }
             }
-        }
+        }*/
         #endregion
     }
     

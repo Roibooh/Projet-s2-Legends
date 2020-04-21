@@ -19,14 +19,16 @@ namespace Objets
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
         private Joueur j;
-        /*
-         * protected internal enum Etat
-         * {
-         *     Attacking, Crouch, Normal
-         * }
-         * Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
-         */
-        // Start is called before the first frame update
+            protected internal enum Etat
+         {
+              Attacking, 
+              Crouch, 
+              Normal,
+              Invincible,
+              Stunt
+         }
+         //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
+         // Start is called before the first frame update
         void Start()
         {
             j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,nbSauts);
@@ -40,10 +42,8 @@ namespace Objets
         {
             Vector3 e = new Vector3(0,(float)-0.5,0);
             ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
-            if (Input.GetKey("e"))
-            {
-                j.Knockback((float)0.1, (float)0.05,1);
-            }
+            
+            
             if (Input.GetKey("z") && j.nbSauts > 0)// haut
             {
                 if (!upKeyAlreadyPressed)
@@ -60,7 +60,7 @@ namespace Objets
                     upKeyAlreadyPressed = false;
                 }
 
-                if (j.CollisionY(o))
+                if (j.position.y <= demiHauteur)
                 {
                     j.nbSauts = j.nbSautsMax;
                 }
@@ -123,7 +123,6 @@ namespace Objets
                 }
             }
             transform.position = j.UpdatePositionJoueur();
-            j.Collision(o);
             //ObjetsMovibles j1 = new Joueur("k",100,Joueur1.position,1,1,1,2); test 
         }
     }

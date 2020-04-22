@@ -26,7 +26,7 @@ public class CountdownController : MonoBehaviour
       countdownTime--;
     }
 
-    countdownDisplay.text = "GAMER OVER!";
+    countdownDisplay.text = "GAME OVER!";
     
     yield return new WaitForSeconds(1F);
     

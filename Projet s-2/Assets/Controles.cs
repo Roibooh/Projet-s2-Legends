@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
@@ -15,21 +14,20 @@ namespace Objets
         [SerializeField] private int masse = 3;
         [SerializeField] private int nbSauts = 3;
         [SerializeField] private float unite = (float)0.45;// mvspd perso
-        private int direction = 180; // 1 = droite
+        private int direction = 0; // 180 = gauche
         private bool upKeyAlreadyPressed;
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
+
+        
+        private bool isCrunsh;
+        private bool inAir;
+        
         protected internal Joueur j;
         private Animator anim;
-        protected internal enum Etat
-         {
-              Attacking, 
-              Crouch, 
-              Normal,
-              Invincible,
-              Stunt
-         }
+        
+            
          //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
          // Start is called before the first frame update
         void Start()
@@ -44,12 +42,9 @@ namespace Objets
         // Update is called once per frame
         void FixedUpdate()
         {
-            Vector3 e = new Vector3(0,(float)-0.5,0);
-            ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
-            if (Input.GetKey("e"))
-            {
-                anim.Play("Hit");
-            } 
+
+            #region GestionTouches
+            
             if (Input.GetKey("up") && j.nbSauts > 0)// haut
             {
                 if (!upKeyAlreadyPressed)
@@ -71,6 +66,8 @@ namespace Objets
                     j.nbSauts = j.nbSautsMax;
                 }
             }
+            
+            
             if (Input.GetKey("down")) //bas
             {
                 if (j.Vitesse.y < 0)
@@ -102,6 +99,7 @@ namespace Objets
                 {
                     j.Vitesse = new Vector2(j.Vitesse.x + unite, j.Vitesse.y);
                     rigthKeyAlreadyPressed = true;
+                    
                     if (direction == 180)
                     {
                         direction = 0;
@@ -123,6 +121,7 @@ namespace Objets
                 {
                     j.Vitesse = new Vector2(j.Vitesse.x - unite, j.Vitesse.y);
                     leftKeyAlreadyPressed = true;
+                    
                     if (direction == 0)
                     {
                         direction = 180;
@@ -138,9 +137,23 @@ namespace Objets
                     leftKeyAlreadyPressed = false;
                 }
             }
+            #endregion
             
             transform.position = j.UpdatePositionJoueur();
-            //ObjetsMovibles j1 = new Joueur("k",100,Joueur1.position,1,1,1,2); test 
+            
+            #region Etats
+
+            foreach (var etat in j.etats)
+            {
+                etat.update();
+            }
+
+            if (j.position.y > demiHauteur)
+            {
+                inAir = true;
+            }
+            #endregion
+            
         }
     }
 }

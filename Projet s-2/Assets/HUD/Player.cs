@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Objets;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -14,15 +15,8 @@ public class Player : MonoBehaviour
     }
 
 
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            health.CurrentVal -= 10;
-        }
-        if (Input.GetKeyDown(KeyCode.U))
-        {
-            health.CurrentVal += 10;
-        }
+        health.CurrentVal = gameObject.GetComponent<Controles>().j.pv;
     }
 }

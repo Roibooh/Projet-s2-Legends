@@ -18,8 +18,9 @@ public class AttackHit : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D other)    
     {
-        other.gameObject.GetComponent<Controles2>().j.estAttaque(10);
         
-        Debug.Log("WOW");
+        other.gameObject.GetComponent<Controles2>().j.estAttaque(20);
+        
+        //Debug.Log("WOW");
     }
 }

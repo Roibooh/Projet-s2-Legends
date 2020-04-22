@@ -14,23 +14,25 @@ namespace Objets
         [SerializeField] private int masse = 3;
         [SerializeField] private int nbSauts = 3;
         [SerializeField] private float unite = (float)0.45;// mvspd perso
+        private int direction = 0; // 180 = gauche
         private bool upKeyAlreadyPressed;
         private bool leftKeyAlreadyPressed;
         private bool rigthKeyAlreadyPressed;
         private bool downKeyAlreadyPressed;
+
+        
+        private bool isCrunsh;
+        private bool inAir;
+        
         protected internal Joueur j;
-            protected internal enum Etat
-         {
-              Attacking, 
-              Crouch, 
-              Normal,
-              Invincible,
-              Stunt
-         }
+        private Animator anim;
+        
+            
          //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
          // Start is called before the first frame update
         void Start()
         {
+            anim = GetComponent<Animator>(); 
             j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,nbSauts);
             upKeyAlreadyPressed = false; 
             leftKeyAlreadyPressed = false;
@@ -40,13 +42,8 @@ namespace Objets
         // Update is called once per frame
         void FixedUpdate()
         {
-            if (!j.isAlive)
-            {
-                gameObject.SetActive(false);
-            }
-            Vector3 e = new Vector3(0,(float)-0.5,0);
-            ObjetsMovibles o = new ObjetsMovibles(e, (float)0.5, 50);
-            
+
+            #region GestionTouches
             
             if (Input.GetKey("z") && j.nbSauts > 0)// haut
             {
@@ -69,6 +66,8 @@ namespace Objets
                     j.nbSauts = j.nbSautsMax;
                 }
             }
+            
+            
             if (Input.GetKey("s")) //bas
             {
                 if (j.Vitesse.y < 0)
@@ -100,6 +99,12 @@ namespace Objets
                 {
                     j.Vitesse = new Vector2(j.Vitesse.x + unite, j.Vitesse.y);
                     rigthKeyAlreadyPressed = true;
+                    
+                    if (direction == 180)
+                    {
+                        direction = 0;
+                        this.transform.localRotation = new Quaternion(0,direction,0,0);
+                    }
                 }
             }
             else
@@ -116,6 +121,12 @@ namespace Objets
                 {
                     j.Vitesse = new Vector2(j.Vitesse.x - unite, j.Vitesse.y);
                     leftKeyAlreadyPressed = true;
+                    
+                    if (direction == 0)
+                    {
+                        direction = 180;
+                        this.transform.localRotation = new Quaternion(0,direction,0,0);
+                    }
                 }
             }
             else
@@ -126,8 +137,22 @@ namespace Objets
                     leftKeyAlreadyPressed = false;
                 }
             }
+            #endregion
+            
             transform.position = j.UpdatePositionJoueur();
-            //ObjetsMovibles j1 = new Joueur("k",100,Joueur1.position,1,1,1,2); test 
+            
+            #region Etats
+
+            foreach (var etat in j.etats)
+            {
+                etat.update();
+            }
+
+            if (j.position.y > demiHauteur)
+            {
+                inAir = true;
+            }
+            #endregion
         }
     }
 }

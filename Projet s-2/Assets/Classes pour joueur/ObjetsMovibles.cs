@@ -6,7 +6,8 @@ namespace Objets
     public  class ObjetsMovibles : Objets
     {
         #region Attributs
-        private float vitessemax;
+
+        internal float vitessemax;
         
         private Vector2 vitesse;
         public Vector2 Vitesse
@@ -32,15 +33,15 @@ namespace Objets
                     vitesse.x = value.x;
                 }
 
-                if (value.y >= this.vitessemax)
+                if (value.y >= this.vitesseMaxY)
                 {
-                    this.vitesse.y = this.vitessemax;
+                    this.vitesse.y = this.vitesseMaxY;
                     this.acceleration.y = 0;
                 }
 
-                else if (value.y <= -vitessemax)
+                else if (value.y <= -vitesseMaxY)
                 {
-                    vitesse.y = -vitessemax;
+                    vitesse.y = -vitesseMaxY;
                     acceleration.y = 0;
                 }
                 else
@@ -59,6 +60,23 @@ namespace Objets
             private set => acceleration = 
                 new Vector2(value.x/masse,value.y/masse);
         }*/
+
+        internal float vitesseMaxY;
+        protected internal Vector3 Position
+        {
+            set
+            {
+                position = value;
+                if (position.y - demiHauteur < 0)
+                {
+                    position = new Vector3(position.x,demiHauteur,position.z);
+                    if (vitesse.y < -1)
+                    {
+                        vitesse.y = vitesse.y * -0.1f;
+                    }
+                }
+            }
+        }
         #endregion
         
         #region Constructeur
@@ -68,6 +86,7 @@ namespace Objets
             this.acceleration = new Vector2(accelerationX, accelerationY);
             this.masse = masse;
             this.vitessemax = vitessemax;
+            this.vitesseMaxY = vitessemax * 5;
         }
         #endregion
         
@@ -86,7 +105,10 @@ namespace Objets
 
         protected internal void Tombe()
         {
-            Vitesse = new Vector2(vitesse.x, vitesse.y - (float)0.005*masse);
+            if (vitesse.y - (float) 0.005 * masse > -vitessemax)
+            {
+                Vitesse = new Vector2(vitesse.x, vitesse.y - (float) 0.005 * masse);
+            }
         }
 
         protected internal void Accelere()//applique acceleration

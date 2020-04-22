@@ -1,9 +1,18 @@
-﻿namespace Objets
+﻿using System;
+using UnityEngine;
+
+namespace Objets
 {
     public class Etats
     {
         protected internal bool actif;
         protected internal int timer;
+
+        public int TimerEnSec
+        {
+            get => timer;
+            set => timer = Convert.ToInt32(value/Time.fixedDeltaTime);
+        }
 
         public Etats()
         {

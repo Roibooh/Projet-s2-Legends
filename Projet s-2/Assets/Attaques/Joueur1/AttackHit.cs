@@ -19,7 +19,7 @@ public class AttackHit : MonoBehaviour
             {
                 joueur2.directionProj = -1;
             }
-            joueur2.j.etats[2].timer = 56;
+            joueur2.j.etats[Joueur.knocked].timer = 3;
             joueur2.j.Vitesse =  new Vector3(joueur2.j.Vitesse.x,joueur2.j.Vitesse.y+1,0);
             joueur2.j.estAttaque(20,1.5f);
         }

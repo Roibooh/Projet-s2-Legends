@@ -56,14 +56,9 @@ namespace Objets
             this.nbSauts = nbSauts;
             this.nbSautsMax = nbSauts;
             
-            Etats et0 = new Etats();
-            Etats et1 = new Etats();
-            Etats et2 = new Etats();
-            Etats et3 = new Etats();
-            Etats et4 = new Etats();
-            Etats et5 = new Etats();
 
-            etats = new Etats[]{et0, et1, et2, et3, et4, et5};
+
+            etats = new Etats[]{new Etats(),new Etats(),new Etats(),new Etats(),new Etats(), new Etats(), };
         }
         
         #endregion

@@ -41,7 +41,7 @@ namespace Objets
 
             #region GestionTouches
 
-            if (!j.etats[1].actif)
+            if (!j.etats[Joueur.stunned].actif)
             {
                 if (Input.GetKey("r")) // haut
                 {
@@ -74,7 +74,10 @@ namespace Objets
                 {
                     if (j.Vitesse.y < 0)
                     {
-                        j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
+                        if (j.Vitesse.y - unite * 2 > -j.vitessemax * 2)
+                        {
+                            j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
+                        }
                     }
 
                     if (Input.GetKey("1"))
@@ -82,13 +85,13 @@ namespace Objets
                         anim.Play("Spike");
                     }
 
-                    if (!downKeyAlreadyPressed && !j.etats[3].actif) // accroupi
+                    if (!downKeyAlreadyPressed && !j.etats[Joueur.crouched].actif) // accroupi
                     {
                         j.demiHauteur /= 2;
                         j.position.y -= j.demiHauteur;
                         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2);
                         downKeyAlreadyPressed = true;
-                        j.etats[3].timer = 2;
+                        j.etats[Joueur.crouched].timer = 2;
                     }
                 }
                 else
@@ -155,7 +158,7 @@ namespace Objets
             
             #region Etats
             
-            if (j.etats[2].actif)
+            if (j.etats[Joueur.knocked].actif)
             {
                 j.position = new Vector3(j.position.x+0.15f*directionProj,j.position.y,j.position.z);
             }
@@ -166,9 +169,10 @@ namespace Objets
 
             if (j.position.y > demiHauteur)
             {
-                j.etats[3].timer = 2;
+                j.etats[Joueur.flying].timer = 2;
             }
             #endregion
+            
         }
     }
 }

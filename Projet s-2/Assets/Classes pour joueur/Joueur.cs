@@ -74,11 +74,7 @@ namespace Objets
                 etats[invincibility].timer = Convert.ToInt32(dureeInv/Time.fixedDeltaTime);
             }
         }
-
-        protected internal void Attaque(Joueur cible, Attaque nomattaque ) //TODO faire les attaques
-        {
-            nomattaque.hit(cible);
-        }
+        
 
         protected internal Vector2 UpdatePositionJoueur()
         {

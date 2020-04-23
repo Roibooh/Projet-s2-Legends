@@ -43,11 +43,17 @@ namespace Objets
 
             if (!j.etats[Joueur.stunned].actif)
             {
-                if (Input.GetKey("r")) // haut
+                if (Input.GetKey("r") && !j.etats[Joueur.crouched].actif && !j.etats[Joueur.attacking].actif) 
                 {
                     anim.Play("Hit");
+                    j.etats[Joueur.attacking].timer = 45;
                 }
-                if (Input.GetKey("z") && j.nbSauts > 0) // haut
+                if (Input.GetKey("t")&& !j.etats[Joueur.attacking].actif)
+                {
+                    anim.Play("Hitup");
+                    j.etats[Joueur.attacking].timer = 35;
+                }
+                if (j.isAlive && Input.GetKey("z") && j.nbSauts > 0) // haut
                 {
                     if (!upKeyAlreadyPressed)
                     {
@@ -70,8 +76,13 @@ namespace Objets
                 }
 
 
-                if (j.isAlive && Input.GetKey("s")) //fastfall
+                if (j.isAlive && Input.GetKey("s") ) //fastfall
                 {
+                    if (Input.GetKey("r") && !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
+                    {
+                        anim.Play("Spike");
+                        j.etats[Joueur.attacking].timer = 35;
+                    }
                     if (j.Vitesse.y < 0)
                     {
                         if (j.Vitesse.y - unite * 2 > -j.vitessemax * 2)
@@ -80,12 +91,7 @@ namespace Objets
                         }
                     }
 
-                    if (Input.GetKey("1"))
-                    {
-                        anim.Play("Spike");
-                    }
-
-                    if (!downKeyAlreadyPressed && !j.etats[Joueur.crouched].actif) // accroupi
+                    if (!downKeyAlreadyPressed && !j.etats[Joueur.flying].actif) // accroupi
                     {
                         j.demiHauteur /= 2;
                         j.position.y -= j.demiHauteur;
@@ -162,14 +168,13 @@ namespace Objets
             {
                 j.position = new Vector3(j.position.x+0.15f*directionProj,j.position.y,j.position.z);
             }
+            if (j.position.y > demiHauteur)
+            {
+                j.etats[Joueur.flying].timer = 4;
+            }
             foreach (var etat in j.etats)
             {
                 etat.update();
-            }
-
-            if (j.position.y > demiHauteur)
-            {
-                j.etats[Joueur.flying].timer = 2;
             }
             #endregion
             

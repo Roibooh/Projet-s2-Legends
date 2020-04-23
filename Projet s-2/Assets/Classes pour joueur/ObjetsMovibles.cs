@@ -62,18 +62,20 @@ namespace Objets
         }*/
 
         internal float vitesseMaxY;
+
         protected internal Vector3 Position
         {
+        
             set
             {
                 position = value;
                 if (position.y - demiHauteur < 0)
                 {
                     position = new Vector3(position.x,demiHauteur,position.z);
-                    if (vitesse.y < -1)
+                    /*if (vitesse.y < -1)
                     {
                         vitesse.y = vitesse.y * -0.1f;
-                    }
+                    }*/
                 }
             }
         }

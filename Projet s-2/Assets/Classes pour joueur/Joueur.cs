@@ -14,7 +14,6 @@ namespace Objets
         protected internal bool isAlive;
         protected internal int nbSauts;
         protected internal int nbSautsMax;
-        
         protected internal Etats[] etats;
         protected internal const int invincibility = 0;
         protected internal const int stunned = 1;
@@ -69,7 +68,7 @@ namespace Objets
         {
             if (!etats[invincibility].actif)
             {
-                etats[1].timer = 35;
+                etats[Joueur.stunned].timer = 35;
                 Pv -= degats;
                 etats[invincibility].timer = Convert.ToInt32(dureeInv/Time.fixedDeltaTime);
             }

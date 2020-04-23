@@ -16,7 +16,7 @@ namespace Objets
             set
             {
                 position = value;
-                if (position.y - demiHauteur < 0)
+                if (position.y - demiHauteur <= 0)
                 {
                     position = new Vector3(position.x,demiHauteur,position.z);
                 }

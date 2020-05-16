@@ -4,6 +4,10 @@ using System.Collections.Generic;
 using Objets;
 using UnityEngine;
 using UnityEngine.UI;
+/* Author : Stefano Mancinelli et Julien Lung Yut Fong
+ *
+ * Script pour faire la transition entre le joueur et la barre de vie associée
+ */
 public class Player : MonoBehaviour
 {
     [SerializeField]

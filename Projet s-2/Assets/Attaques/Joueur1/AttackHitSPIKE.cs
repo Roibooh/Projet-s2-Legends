@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using Objets;
 using UnityEngine;
+/* Author : Julien Lung Yut Fong
+ *
+ * Scripte de l'attaque vers le bas du joueur 1
+ */
 public class AttackHitSPIKE : MonoBehaviour
 {
     private void OnTriggerStay2D(Collider2D other)    

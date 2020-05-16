@@ -2,7 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/* Author : Stefano Mancinelli
+ *
+ * Classe des barres de vie
+ */
 [Serializable]
 public class Stat
 {

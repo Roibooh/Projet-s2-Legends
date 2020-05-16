@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
-
+/* Author : Julien Lung Yut Fong et Guillaume MERCIER
+ *
+ * Classe des objets movibles
+ */
 namespace Objets
 {
     public  class ObjetsMovibles : Objets

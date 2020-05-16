@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using Objets;
 using UnityEngine;
-
+/* Author : Julien Lung Yut Fong
+ *
+ * Scripte de l'attaque sur le haut du joueur 2
+ */
 public class AttackHitUP2 : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)

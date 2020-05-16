@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
 using UnityEngine;
-
+/* Author : Julien Lung Yut Fong et Guillaume MERCIER
+ *
+ * Classe des joueurs
+ */
 namespace Objets
 {
     public class Joueur : ObjetsMovibles
@@ -68,9 +71,9 @@ namespace Objets
         {
             if (!etats[invincibility].actif)
             {
-                etats[Joueur.stunned].timer = 35;
+                etats[Joueur.stunned].Timer = 35;
                 Pv -= degats;
-                etats[invincibility].timer = Convert.ToInt32(dureeInv/Time.fixedDeltaTime);
+                etats[invincibility].Timer = 5;
             }
         }
         

@@ -1,5 +1,8 @@
 ﻿using System.Security.Principal;
-
+/* Author : Julien Lung Yut Fong
+ *
+ * Classe des attaques
+ */
 namespace Objets
 {
     public class Attaque

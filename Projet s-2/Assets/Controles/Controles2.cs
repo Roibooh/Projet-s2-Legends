@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
-
+/* Author : Guillaume MERCIER et Julien Lung Yut Fong
+ *
+ * Script permettant la liaison entre le joueur le jeu et l'objet joueur
+ */
 namespace Objets
 {
     public class Controles2 : MonoBehaviour
@@ -46,12 +49,12 @@ namespace Objets
                 if (Input.GetKey("r") && !j.etats[Joueur.crouched].actif && !j.etats[Joueur.attacking].actif) 
                 {
                     anim.Play("Hit");
-                    j.etats[Joueur.attacking].timer = 45;
+                    j.etats[Joueur.attacking].Timer = 45;
                 }
                 if (Input.GetKey("t")&& !j.etats[Joueur.attacking].actif)
                 {
                     anim.Play("Hitup");
-                    j.etats[Joueur.attacking].timer = 35;
+                    j.etats[Joueur.attacking].Timer = 35;
                 }
                 if (j.isAlive && Input.GetKey("z") && j.nbSauts > 0) // haut
                 {
@@ -81,7 +84,7 @@ namespace Objets
                     if (Input.GetKey("r") && !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
                     {
                         anim.Play("Spike");
-                        j.etats[Joueur.attacking].timer = 35;
+                        j.etats[Joueur.attacking].Timer = 3;
                     }
                     if (j.Vitesse.y < 0)
                     {
@@ -97,7 +100,7 @@ namespace Objets
                         j.position.y -= j.demiHauteur;
                         transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2);
                         downKeyAlreadyPressed = true;
-                        j.etats[Joueur.crouched].timer = 2;
+                        j.etats[Joueur.crouched].Timer = 2;
                     }
                 }
                 else
@@ -170,7 +173,7 @@ namespace Objets
             }
             if (j.position.y > demiHauteur)
             {
-                j.etats[Joueur.flying].timer = 4;
+                j.etats[Joueur.flying].Timer = 4;
             }
             foreach (var etat in j.etats)
             {

@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using Objets;
 using UnityEngine;
-
+/* Author : Julien Lung Yut Fong
+ *
+ * Scripte de l'attaque sur le coté du joueur 1
+ */
 public class AttackHit : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D other)
@@ -19,7 +22,7 @@ public class AttackHit : MonoBehaviour
             {
                 joueur2.directionProj = -1;    
             }
-            joueur2.j.etats[Joueur.knocked].timer = 56;
+            joueur2.j.etats[Joueur.knocked].Timer = 2;
             joueur2.j.Vitesse =  new Vector3(joueur2.j.Vitesse.x,joueur2.j.Vitesse.y+1,0);
             joueur2.j.estAttaque(20,0.4f);
         }

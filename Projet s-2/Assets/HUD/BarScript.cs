@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/* Author : Stefano Mancinelli
+ *
+ * Classe des barres de vie
+ */
 public class BarScript : MonoBehaviour
 {
     private float fillAmount;

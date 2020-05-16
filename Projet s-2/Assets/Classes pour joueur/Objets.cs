@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
-
+/* Author : Guillaume MERCIER et Julien Lung Yut Fong
+ *
+ * Classe des objets
+ */
 namespace Objets
 {
     public abstract class Objets

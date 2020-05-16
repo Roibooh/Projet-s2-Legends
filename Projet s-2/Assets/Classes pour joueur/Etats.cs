@@ -1,14 +1,17 @@
 ﻿using System;
 using UnityEngine;
-
+/* Author : Guillaume MERCIER
+ *
+ * Classe des états
+ */
 namespace Objets
 {
     public class Etats
     {
         protected internal bool actif;
-        protected internal int timer;
+        private int timer;
 
-        public int TimerEnSec
+        public int Timer
         {
             get => timer;
             set => timer = Convert.ToInt32(value/Time.fixedDeltaTime);

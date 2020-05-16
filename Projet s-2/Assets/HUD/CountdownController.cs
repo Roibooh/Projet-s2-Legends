@@ -3,7 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+/* Author : Stefano Mancinelli
+ *
+ * Classe du conteur
+ */
 public class CountdownController : MonoBehaviour
 {
   public int countdownTime;

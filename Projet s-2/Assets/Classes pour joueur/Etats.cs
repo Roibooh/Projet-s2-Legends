@@ -11,10 +11,19 @@ namespace Objets
         protected internal bool actif;
         private int timer;
 
+        public void setTimer(float time)
+        {
+             int t = Convert.ToInt32(time/Time.fixedDeltaTime);
+             if (t > timer)
+             {
+                 timer = t;
+             }
+        }
+
         public int Timer
         {
             get => timer;
-            set => timer = Convert.ToInt32(value/Time.fixedDeltaTime);
+            private set => timer = value;
         }
 
         public Etats()

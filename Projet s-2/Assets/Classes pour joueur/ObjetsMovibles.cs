@@ -11,6 +11,8 @@ namespace Objets
         #region Attributs
 
         internal float vitessemax;
+        protected internal int direction = 0; // 180 = gauche
+        protected internal int directionProj = 0;
         
         private Vector2 vitesse;
         public Vector2 Vitesse
@@ -85,7 +87,7 @@ namespace Objets
         #endregion
         
         #region Constructeur
-        public ObjetsMovibles(Vector3 Position, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitesseX = 0, float vitesseY = 0, float vitessemax = (float) 0.6,float accelerationX = 0, float accelerationY = 0):base(Position,demiHauteur,demiLargeur)
+        public ObjetsMovibles(Vector3 Position, Vector3 localscale, Quaternion localrotate, float demiHauteur=1,float demiLargeur=1, float masse =1 , float vitesseX = 0, float vitesseY = 0, float vitessemax = (float) 0.6,float accelerationX = 0, float accelerationY = 0):base(Position,demiHauteur,demiLargeur, localscale, localrotate)
         {
             this.vitesse = new Vector2(vitesseX,vitesseY);
             this.acceleration = new Vector2(accelerationX, accelerationY);

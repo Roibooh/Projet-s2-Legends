@@ -12,6 +12,8 @@ namespace Objets
     {
         #region Attributs
         protected internal Vector3 position;
+        protected internal Vector3 localscale;
+        protected internal Quaternion localrotate;
         protected internal float demiHauteur;
         protected internal float demiLargeur;
         protected internal Vector3 Position
@@ -29,11 +31,13 @@ namespace Objets
         #endregion
         
         #region Constructeur
-        public Objets(Vector3 position, float demiHauteur,float demiLargeur)
+        public Objets(Vector3 position, float demiHauteur,float demiLargeur, Vector3 localscale, Quaternion localrotate)
         {
             this.position = position;
             this.demiLargeur = demiLargeur;// changer largeur et hauteur par demi hauteur et demi largeur
             this.demiHauteur = demiHauteur;
+            this.localrotate = localrotate;
+            this.localscale = localscale;
         }
         #endregion
 

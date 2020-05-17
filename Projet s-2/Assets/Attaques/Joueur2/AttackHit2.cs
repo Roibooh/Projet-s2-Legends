@@ -16,14 +16,14 @@ public class AttackHit2 : MonoBehaviour
             {
                 if (joueur2.j.position.x - joueur.j.position.x > 0)
                 {
-                    joueur2.directionProj = 1;
+                    joueur2.j.directionProj = 1;
                 }
                 else
                 {
-                    joueur2.directionProj = -1;
+                    joueur2.j.directionProj = -1;
                 }
 
-                joueur2.j.etats[Joueur.knocked].Timer = 2;
+                joueur2.j.etats[Joueur.knocked].setTimer (0.5f);
                 joueur2.j.Vitesse = new Vector3(joueur2.j.Vitesse.x, joueur2.j.Vitesse.y + 1, 0);
                 joueur2.j.estAttaque(20, 0.4f);
             }

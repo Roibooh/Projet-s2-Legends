@@ -10,33 +10,27 @@ namespace Objets
 {
     public class Controles2 : MonoBehaviour
     {
-        [SerializeField] private string nom = "Test";
-        [SerializeField] private int pv = 100;
-        [SerializeField] private int demiHauteur = 1;
-        [SerializeField] private int demiLargeur = 1;
-        [SerializeField] private int masse = 3;
-        [SerializeField] private int nbSauts = 3;
-        [SerializeField] private float unite = (float)0.45;// mvspd perso
-        private int direction = 0; // 180 = gauche
-        private bool upKeyAlreadyPressed;
-        private bool leftKeyAlreadyPressed;
-        private bool rigthKeyAlreadyPressed;
-        private bool downKeyAlreadyPressed;
-        protected internal int directionProj = 0;
+        [SerializeField] protected internal string nom = "Test";
+        [SerializeField] protected internal int pv = 100;
+        [SerializeField] protected internal int demiHauteur = 1;
+        [SerializeField] protected internal int demiLargeur = 1;
+        [SerializeField] protected internal int masse = 3;
+        [SerializeField] protected internal int nbSauts = 3;
+        [SerializeField] protected internal float unite = (float)0.45;// mvspd perso
+
         protected internal Joueur j;
-        private Animator anim;
-        
-            
-         //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
+        protected internal Joueur.Controle c;
+        protected internal Animator anim;
+
+
+        //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
          // Start is called before the first frame update
         void Start()
         {
             anim = GetComponent<Animator>(); 
-            j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,nbSauts);
-            upKeyAlreadyPressed = false; 
-            leftKeyAlreadyPressed = false;
-            rigthKeyAlreadyPressed = false;
-            downKeyAlreadyPressed = false;
+            j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,transform.localScale,transform.localRotation,nbSauts);
+            string[] keyList = {"r", "t", "q","d","z","s"};
+            c = new Joueur.Controle(unite,keyList);
         }
         // Update is called once per frame
         void FixedUpdate()
@@ -44,136 +38,23 @@ namespace Objets
 
             #region GestionTouches
 
-            if (!j.etats[Joueur.stunned].actif)
-            {
-                if (Input.GetKey("r") && !j.etats[Joueur.crouched].actif && !j.etats[Joueur.attacking].actif) 
-                {
-                    anim.Play("Hit");
-                    j.etats[Joueur.attacking].Timer = 45;
-                }
-                if (Input.GetKey("t")&& !j.etats[Joueur.attacking].actif)
-                {
-                    anim.Play("Hitup");
-                    j.etats[Joueur.attacking].Timer = 35;
-                }
-                if (j.isAlive && Input.GetKey("z") && j.nbSauts > 0) // haut
-                {
-                    if (!upKeyAlreadyPressed)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x, unite);
-                        upKeyAlreadyPressed = true;
-                    }
-                }
-                else
-                {
-                    if (upKeyAlreadyPressed)
-                    {
-                        j.nbSauts--;
-                        upKeyAlreadyPressed = false;
-                    }
+            (c,j)=Joueur.keyHandeler(c,j,anim);
 
-                    if (j.position.y <= demiHauteur)
-                    {
-                        j.nbSauts = j.nbSautsMax;
-                    }
-                }
-
-
-                if (j.isAlive && Input.GetKey("s") ) //fastfall
-                {
-                    if (Input.GetKey("r") && !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
-                    {
-                        anim.Play("Spike");
-                        j.etats[Joueur.attacking].Timer = 3;
-                    }
-                    if (j.Vitesse.y < 0)
-                    {
-                        if (j.Vitesse.y - unite * 2 > -j.vitessemax * 2)
-                        {
-                            j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - unite * 2);
-                        }
-                    }
-
-                    if (!downKeyAlreadyPressed && !j.etats[Joueur.flying].actif) // accroupi
-                    {
-                        j.demiHauteur /= 2;
-                        j.position.y -= j.demiHauteur;
-                        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2);
-                        downKeyAlreadyPressed = true;
-                        j.etats[Joueur.crouched].Timer = 2;
-                    }
-                }
-                else
-                {
-                    if (downKeyAlreadyPressed) // Reprendre forme normale
-                    {
-                        j.position.y += j.demiHauteur;
-                        j.demiHauteur *= 2;
-                        transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2);
-                        downKeyAlreadyPressed = false;
-                    }
-                }
-
-                if (j.isAlive && Input.GetKey("d")) //droite
-                {
-                    if (!rigthKeyAlreadyPressed)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x + unite, j.Vitesse.y);
-                        rigthKeyAlreadyPressed = true;
-
-                        if (direction == 180)
-                        {
-                            direction = 0;
-                            this.transform.localRotation = new Quaternion(0, direction, 0, 0);
-                        }
-                    }
-                }
-                else
-                {
-                    if (rigthKeyAlreadyPressed)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x - unite, j.Vitesse.y);
-                        rigthKeyAlreadyPressed = false;
-                    }
-                }
-
-                if (j.isAlive && Input.GetKey("q")) //gauche
-                {
-                    if (!leftKeyAlreadyPressed)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x - unite, j.Vitesse.y);
-                        leftKeyAlreadyPressed = true;
-
-                        if (direction == 0)
-                        {
-                            direction = 180;
-                            this.transform.localRotation = new Quaternion(0, direction, 0, 0);
-                        }
-                    }
-                }
-                else
-                {
-                    if (leftKeyAlreadyPressed)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x + unite, j.Vitesse.y);
-                        leftKeyAlreadyPressed = false;
-                    }
-                }
-            }
-
-            #endregion
-            
             transform.position = j.UpdatePositionJoueur();
+            transform.localScale = j.localscale;
+            transform.localRotation = j.localrotate;
+            
+            #endregion
             
             #region Etats
             
             if (j.etats[Joueur.knocked].actif)
             {
-                j.position = new Vector3(j.position.x+0.15f*directionProj,j.position.y,j.position.z);
+                j.position = new Vector3(j.position.x+0.15f*j.directionProj,j.position.y,j.position.z);
             }
             if (j.position.y > demiHauteur)
             {
-                j.etats[Joueur.flying].Timer = 4;
+                j.etats[Joueur.flying].setTimer(2);
             }
             foreach (var etat in j.etats)
             {

@@ -24,11 +24,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         health.CurrentVal = joueur.j.pv;
-        if (!joueur.j.isAlive )
+        if (!joueur.j.isAlive)
         {
             joueur.j.demiHauteur = 0.25f;
+            joueur.j.demiLargeur = 1.8f;
             joueur.transform.localScale = new Vector3(3.6f,0.5f);
-            // WIN JOUEUR 2
+            
+            // WIN JOUEUR 1
         }
     }
 }

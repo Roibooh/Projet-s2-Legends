@@ -13,7 +13,8 @@ public class AttackHitUP2 : MonoBehaviour
         Controles joueur = other.gameObject.GetComponent<Controles>();
         if (joueur != null)
         {
-            joueur.j.Vitesse = new Vector3(joueur.j.Vitesse.x, joueur.j.Vitesse.y + 1, 0);
+            joueur.j.etats[Joueur.stunned].setTimer(0.6f);
+            joueur.j.Vitesse = new Vector3(joueur.j.Vitesse.x, joueur.j.Vitesse.y >0.4f? joueur.j.Vitesse.y:0.4f, 0);
             joueur.j.estAttaque(20,0.4f);
         }
     }

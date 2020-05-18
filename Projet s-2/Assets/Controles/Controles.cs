@@ -17,6 +17,7 @@ namespace Objets
         [SerializeField] protected internal int masse = 3;
         [SerializeField] protected internal int nbSauts = 3;
         [SerializeField] protected internal float unite = (float)0.45;// mvspd perso
+        [SerializeField] protected internal string[] keyList ={"r", "t", "q", "d", "z", "s"};
 
         protected internal Joueur j;
         protected internal Joueur.Controle c;
@@ -25,11 +26,10 @@ namespace Objets
 
         //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
          // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             anim = GetComponent<Animator>(); 
             j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,transform.localScale,transform.localRotation,nbSauts);
-            string[] keyList = {"[1]", "[2]", "left","right","up","down"};
             c = new Joueur.Controle(unite,keyList);
         }
         // Update is called once per frame
@@ -40,28 +40,17 @@ namespace Objets
 
             (c,j)=Joueur.keyHandeler(c,j,anim);
 
-            
-            #endregion
-            
             transform.position = j.UpdatePositionJoueur();
             transform.localScale = j.localscale;
             transform.localRotation = j.localrotate;
             
-            #region Etats
-            if (j.etats[Joueur.knocked].actif)
-            {
-                j.position = new Vector3(j.position.x+0.15f*j.directionProj,j.position.y,j.position.z);
-            }
-            if (j.position.y > demiHauteur)
-            {
-                j.etats[Joueur.flying].setTimer(2);
-            }
-            foreach (var etat in j.etats)
-            {
-                etat.update();
-            }
             #endregion
+
+            #region GestionEtats
             
+            j = Joueur.etatHandler(j);
+            
+            #endregion
         }
     }
 }

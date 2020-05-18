@@ -92,28 +92,27 @@ namespace Objets
         {
             if (!etats[invincibility].actif)
             {
-                etats[Joueur.stunned].setTimer(2);
+                this.etats[invincibility].setTimer(dureeInv);
                 Pv -= degats;
-                etats[invincibility].setTimer (5);
             }
         }
 
         protected internal static (Controle c, Joueur j) keyHandeler(Controle c, Joueur j, Animator anim)
         {
-            if (!j.etats[Joueur.stunned].actif)
+            if (j.isAlive && !j.etats[Joueur.stunned].actif)
             {
                 if (Input.GetKey(c.keyList[Controle.Hit])&& !j.etats[Joueur.attacking].actif) //Attaque
                 {
                     anim.Play("Hit");
-                    j.etats[Joueur.attacking].setTimer (1);
+                    j.etats[Joueur.attacking].setTimer (0.5f);
                 }
                 if (Input.GetKey(c.keyList[Controle.HitUp])&& !j.etats[Joueur.attacking].actif) //Attaque Haut
                 {
                     anim.Play("Hitup");
-                    j.etats[Joueur.attacking].setTimer (1);
+                    j.etats[Joueur.attacking].setTimer (0.5f);
                 }
                 
-                if (j.isAlive && Input.GetKey(c.keyList[Controle.Up]) && j.nbSauts > 0) //saut
+                if (Input.GetKey(c.keyList[Controle.Up]) && j.nbSauts > 0) //saut
                 {
                     if (!c.upKeyAlreadyPressed)
                     {
@@ -136,7 +135,7 @@ namespace Objets
                 }
 
 
-                if (j.isAlive && Input.GetKey(c.keyList[Controle.Down])) //fastfall
+                if (Input.GetKey(c.keyList[Controle.Down])) //fastfall
                 {
                     if (j.Vitesse.y < 0)
                     {
@@ -149,7 +148,7 @@ namespace Objets
                     if (Input.GetKey(c.keyList[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
                     {
                         anim.Play("Spike");
-                        j.etats[Joueur.attacking].setTimer (35);
+                        j.etats[Joueur.attacking].setTimer (1);
                     }
 
                     if (!c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif) // accroupi
@@ -172,7 +171,7 @@ namespace Objets
                     }
                 }
 
-                if (j.isAlive && Input.GetKey(c.keyList[Controle.Right])) //droite
+                if (Input.GetKey(c.keyList[Controle.Right])) //droite
                 {
                     if (!c.rigthKeyAlreadyPressed)
                     {
@@ -195,7 +194,7 @@ namespace Objets
                     }
                 }
 
-                if (j.isAlive && Input.GetKey(c.keyList[Controle.Left])) //gauche
+                if (Input.GetKey(c.keyList[Controle.Left])) //gauche
                 {
                     if (!c.leftKeyAlreadyPressed)
                     {
@@ -222,6 +221,24 @@ namespace Objets
             return (c,j);
         }
 
+        protected internal static Joueur etatHandler(Joueur j)
+        {
+            if (j.etats[Joueur.knocked].actif)
+            {
+                j.position = new Vector3(j.position.x+0.15f*j.directionProj,j.position.y,j.position.z);
+            }
+            if (j.position.y > j.demiHauteur)
+            {
+                j.etats[Joueur.flying].setTimer(Time.fixedDeltaTime*2);
+            }
+
+            foreach (var etat in j.etats)
+            {
+                etat.update();
+            }
+
+            return j;
+        }
         protected internal Vector2 UpdatePositionJoueur()
         {
             return this.UpdatePositionObjetMovible();

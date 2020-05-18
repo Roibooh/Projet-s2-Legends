@@ -82,6 +82,15 @@ namespace Objets
                         vitesse.y = vitesse.y * -0.1f;
                     }*/
                 }
+                if (position.x -demiLargeur< -38)
+                {
+                    position = new Vector3(-38+demiLargeur,position.y,position.z);
+                }
+                if (position.x+demiLargeur > 38)
+                {
+                    position = new Vector3(38-demiLargeur,position.y,position.z);
+
+                }
             }
         }
         #endregion
@@ -106,8 +115,7 @@ namespace Objets
         
         protected internal void Deplace() //Deplace de X et Y
         {
-            Position = new Vector3(position.x + vitesse.x, position.y, position.z);
-            position=  new Vector3(position.x, position.y+ vitesse.y, position.z);
+            Position = new Vector3(position.x + vitesse.x, position.y + vitesse.y, position.z);
         }
 
         protected internal void Tombe()
@@ -128,37 +136,6 @@ namespace Objets
             this.Vitesse = new Vector2(this.Vitesse.x + forceKBx * direction / this.masse, this.Vitesse.y + forceKBy / this.masse);
         }
         
-        /*
-        protected internal void Collision(Objets obj2)
-        {
-            if (CollisionX(obj2)&&CollisionY(obj2))
-            {
-                if (obj2.position.x - obj2.demiLargeur- this.position.x + this.demiLargeur >= 0)// check gauche
-                {
-                    this.Position = new Vector3(obj2.position.x - this.demiLargeur - obj2.demiLargeur, position.y,position.z);
-                    this.vitesse.x = 0;
-                    this.acceleration.x = 0;
-                }
-                else if (obj2.position.x + obj2.demiLargeur - this.position.x + this.demiLargeur < 0)// check droit
-                {
-                    this.Position = new Vector3(obj2.position.x + this.demiLargeur + obj2.demiLargeur,position.y,position.z);
-                    this.vitesse.x = 0;
-                    this.acceleration.x = 0;
-                }
-                if (obj2.position.y - obj2.demiHauteur - this.position.y + this.demiHauteur >= 0) // check bas 
-                {
-                    this.Position = new Vector3(position.x,obj2.position.y - obj2.demiHauteur - this.demiHauteur,position.z);
-                    this.vitesse.y = 0;
-                    this.acceleration.y = 0;
-                }
-                else if (obj2.position.y + obj2.demiHauteur - this.position.y - this.demiHauteur < 0) // check haut
-                {
-                    this.Position = new Vector3(position.x,obj2.demiHauteur + obj2.position.y + this.demiHauteur,position.z);
-                    this.vitesse.y = 0;
-                    this.acceleration.y = 0;
-                }
-            }
-        }*/
 
         protected internal Vector2 UpdatePositionObjetMovible()
         {

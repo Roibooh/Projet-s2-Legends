@@ -8,6 +8,10 @@ using UnityEngine;
  */
 public class AttackHitSPIKE : MonoBehaviour
 {
+    private void Start()
+    {
+        transform.localScale = Personnages.Personnages.perso1.scaleHitUp;
+    }
     private void OnTriggerEnter2D(Collider2D other)    
     {
         

@@ -17,10 +17,10 @@ namespace Objets
         [SerializeField] protected internal int masse = 3;
         [SerializeField] protected internal int nbSauts = 3;
         [SerializeField] protected internal float unite = (float)0.45;// mvspd perso
-        [SerializeField] protected internal string[] keyList ={"r", "t", "q", "d", "z", "s"};
 
         protected internal Joueur j;
         protected internal Joueur.Controle c;
+        protected internal Personnages.Personnages.Personnage p;
         protected internal Animator anim;
 
 
@@ -30,7 +30,10 @@ namespace Objets
         {
             anim = GetComponent<Animator>(); 
             j = new Joueur(nom,pv,transform.position,demiHauteur,demiLargeur,masse,transform.localScale,transform.localRotation,nbSauts);
-            c = new Joueur.Controle(unite,keyList);
+            c = new Joueur.Controle(unite);
+            p = Personnages.Personnages.perso1;
+            
+            
         }
         // Update is called once per frame
         void FixedUpdate()
@@ -38,7 +41,7 @@ namespace Objets
 
             #region GestionTouches
 
-            (c,j)=Joueur.keyHandeler(c,j,anim);
+            (c,j)=Joueur.keyHandeler(c,j,anim,p);
 
             transform.position = j.UpdatePositionJoueur();
             transform.localScale = j.localscale;

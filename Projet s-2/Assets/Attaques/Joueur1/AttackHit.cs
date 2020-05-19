@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Objets;
 using UnityEngine;
@@ -8,6 +9,11 @@ using UnityEngine;
  */
 public class AttackHit : MonoBehaviour
 {
+    private void Start()
+    {
+        transform.localScale = Personnages.Personnages.perso1.scaleHit;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         Controles2 joueur2 = other.gameObject.GetComponent<Controles2>();

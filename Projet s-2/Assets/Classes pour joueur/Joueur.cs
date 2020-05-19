@@ -31,19 +31,23 @@ namespace Objets
             protected internal bool leftKeyAlreadyPressed = false;
             protected internal bool rigthKeyAlreadyPressed = false;
             protected internal bool downKeyAlreadyPressed = false;
+            protected internal bool isShooting = false;
             protected internal float unite;
-
-            protected internal string[] keyList;
+            
             public const int Hit = 0;
             public const int HitUp = 1;
             public const int Left = 2;
             public const int Right = 3;
             public const int Up = 4;
             public const int Down = 5;
-            public Controle(float unite, string[] keyList)
+            public const int Projectile = 6;
+
+            public const int AnimHit = 0;
+            public const int AnimHitUp = 1;
+            public const int AnimHitDown = 2;
+            public Controle(float unite)
             {
                 this.unite = unite;
-                this.keyList = keyList;
             }
         }
         
@@ -97,22 +101,28 @@ namespace Objets
             }
         }
 
-        protected internal static (Controle c, Joueur j) keyHandeler(Controle c, Joueur j, Animator anim)
+        protected internal static (Controle c, Joueur j) keyHandeler(Controle c, Joueur j, Animator anim, Personnages.Personnages.Personnage p)
         {
             if (j.isAlive && !j.etats[Joueur.stunned].actif)
             {
-                if (Input.GetKey(c.keyList[Controle.Hit])&& !j.etats[Joueur.attacking].actif) //Attaque
+                if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif)
                 {
-                    anim.Play("Hit");
-                    j.etats[Joueur.attacking].setTimer (0.5f);
+                    //TODO
                 }
-                if (Input.GetKey(c.keyList[Controle.HitUp])&& !j.etats[Joueur.attacking].actif) //Attaque Haut
+                
+                if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif) //Attaque
                 {
-                    anim.Play("Hitup");
+                    anim.Play(p.anim[Controle.AnimHit]);
+                    j.etats[Joueur.attacking].setTimer (0.5f);
+                    
+                }
+                if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif) //Attaque Haut
+                {
+                    anim.Play(p.anim[Controle.AnimHitUp]);
                     j.etats[Joueur.attacking].setTimer (0.5f);
                 }
                 
-                if (Input.GetKey(c.keyList[Controle.Up]) && j.nbSauts > 0) //saut
+                if (Input.GetKey(p.keys[Controle.Up]) && j.nbSauts > 0) //saut
                 {
                     if (!c.upKeyAlreadyPressed)
                     {
@@ -135,7 +145,7 @@ namespace Objets
                 }
 
 
-                if (Input.GetKey(c.keyList[Controle.Down])) //fastfall
+                if (Input.GetKey(p.keys[Controle.Down])) //fastfall
                 {
                     if (j.Vitesse.y < 0)
                     {
@@ -145,9 +155,9 @@ namespace Objets
                         }
                     }
 
-                    if (Input.GetKey(c.keyList[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
+                    if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
                     {
-                        anim.Play("Spike");
+                        anim.Play(p.anim[Controle.AnimHitDown]);
                         j.etats[Joueur.attacking].setTimer (1);
                     }
 
@@ -171,7 +181,7 @@ namespace Objets
                     }
                 }
 
-                if (Input.GetKey(c.keyList[Controle.Right])) //droite
+                if (Input.GetKey(p.keys[Controle.Right])) //droite
                 {
                     if (!c.rigthKeyAlreadyPressed)
                     {
@@ -194,7 +204,7 @@ namespace Objets
                     }
                 }
 
-                if (Input.GetKey(c.keyList[Controle.Left])) //gauche
+                if (Input.GetKey(p.keys[Controle.Left])) //gauche
                 {
                     if (!c.leftKeyAlreadyPressed)
                     {

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Julien\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Julien\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Projet s-2.-970812421.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Julien\Desktop\Projet-s2-Legends\Projet s-2" t="IncludeRecursive">
+    <e p="C:\Users\Admin\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Admin\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_Projet s-2.-102858684.00" t="ExcludeRecursive" />
+    <e p="D:\Fichier imp\Info\C#\Projet-s2\Projet s-2" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Attaques" t="Include">
@@ -18,6 +18,7 @@
             <e p="AttackHitSPIKE2.cs" t="Include" />
             <e p="AttackHitUP2.cs" t="Include" />
           </e>
+          <e p="Projectiles.cs" t="Include" />
         </e>
         <e p="Classes pour joueur" t="Include">
           <e p="Etats.cs" t="Include" />
@@ -36,6 +37,9 @@
           <e p="CountdownController.cs" t="Include" />
           <e p="Player.cs" t="Include" />
           <e p="Player2.cs" t="Include" />
+        </e>
+        <e p="Personnages" t="Include">
+          <e p="Personnage.cs" t="Include" />
         </e>
         <e p="Scenes" t="Include">
           <e p="Menu.cs" t="Include" />

@@ -34,12 +34,16 @@ namespace Objets
 
         public void update()
         {
-            actif = true;
-            timer--;
+            
             if (timer <= 0)
             {
                 timer = 0;
                 actif = false;
+            }
+            else
+            {
+                actif = true;
+                timer--;
             }
         }
     }

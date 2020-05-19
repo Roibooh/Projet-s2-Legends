@@ -51,7 +51,7 @@ namespace Objets
 
             #region GestionEtats
             
-            j = Joueur.etatHandler(j);
+            j = Joueur.etatHandler(j,p,anim);
             
             #endregion
         }

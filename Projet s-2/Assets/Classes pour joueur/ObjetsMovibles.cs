@@ -82,13 +82,13 @@ namespace Objets
                         vitesse.y = vitesse.y * -0.1f;
                     }*/
                 }
-                if (position.x -demiLargeur< -38)
+                if (position.x -demiLargeur< -35)
                 {
-                    position = new Vector3(-38+demiLargeur,position.y,position.z);
+                    position = new Vector3(-35+demiLargeur,position.y,position.z);
                 }
-                if (position.x+demiLargeur > 38)
+                if (position.x+demiLargeur > 35)
                 {
-                    position = new Vector3(38-demiLargeur,position.y,position.z);
+                    position = new Vector3(35-demiLargeur,position.y,position.z);
 
                 }
             }

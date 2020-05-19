@@ -18,7 +18,8 @@ public class AttackHitUP : MonoBehaviour
         if (joueur2 != null)
         {
             joueur2.j.Vitesse = new Vector3(joueur2.j.Vitesse.x, joueur2.j.Vitesse.y >0.4f? joueur2.j.Vitesse.y:0.4f, 0);
-            joueur2.j.estAttaque(20,0.4f);
+            joueur2.j.etats[Joueur.stunned].setTimer (0.5f);
+            joueur2.j.estAttaque(10,0.4f);
         }
     }
 }

@@ -45,6 +45,12 @@ namespace Objets
             public const int AnimHit = 0;
             public const int AnimHitUp = 1;
             public const int AnimHitDown = 2;
+            public const int AnimJump = 4;
+            public const int AnimFlyingUp = 5;
+            public const int AnimFlyingDown= 6;
+            public const int AnimFlyingKick= 7;
+            public const int AnimLand = 8;
+            
             public Controle(float unite)
             {
                 this.unite = unite;
@@ -126,6 +132,7 @@ namespace Objets
                 {
                     if (!c.upKeyAlreadyPressed)
                     {
+                        anim.Play(p.anim[Controle.AnimJump]);
                         j.Vitesse = new Vector2(j.Vitesse.x, c.unite);
                         c.upKeyAlreadyPressed = true;
                     }
@@ -146,8 +153,7 @@ namespace Objets
 
 
                 if (Input.GetKey(p.keys[Controle.Down])) //fastfall
-                {
-                    if (j.Vitesse.y < 0)
+                { 
                     {
                         if (j.Vitesse.y - c.unite * 2 > -j.vitessemax*2)
                         {
@@ -231,15 +237,23 @@ namespace Objets
             return (c,j);
         }
 
-        protected internal static Joueur etatHandler(Joueur j)
+        protected internal static Joueur etatHandler(Joueur j, Personnages.Personnages.Personnage p,Animator anim)
         {
             if (j.etats[Joueur.knocked].actif)
             {
                 j.position = new Vector3(j.position.x+0.15f*j.directionProj,j.position.y,j.position.z);
             }
+            if (j.etats[Joueur.flying].actif && j.Vitesse.y>0)
+            {
+                anim.Play(p.anim[Controle.AnimFlyingUp]);
+            }
+            else if (j.etats[Joueur.flying].actif && j.Vitesse.y<0)
+            {
+                anim.Play(p.anim[Controle.AnimFlyingDown]);
+            }
             if (j.position.y > j.demiHauteur)
             {
-                j.etats[Joueur.flying].setTimer(Time.fixedDeltaTime*2);
+                j.etats[Joueur.flying].setTimer(Time.fixedDeltaTime);
             }
 
             foreach (var etat in j.etats)

@@ -27,10 +27,10 @@ public class Player : MonoBehaviour
         if (!joueur.j.isAlive)
         {
             joueur.j.demiHauteur = 0.25f;
-            joueur.j.demiLargeur = 1.8f;
-            joueur.transform.localScale = new Vector3(3.6f,0.5f);
+            joueur.j.localrotate = new Quaternion(joueur.j.localrotate.z + 90,15,-90,0);
+
             
-            // WIN JOUEUR 1
+            // WIN JOUEUR 2
         }
     }
 }

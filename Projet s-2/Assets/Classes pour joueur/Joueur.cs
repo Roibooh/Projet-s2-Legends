@@ -24,7 +24,7 @@ namespace Objets
         protected internal const int crouched = 3;
         protected internal const int flying = 4;
         protected internal const int attacking = 5;
-
+        protected internal const int blocked = 6;
         public class Controle
         {
             protected internal bool upKeyAlreadyPressed = false;
@@ -50,7 +50,8 @@ namespace Objets
             public const int AnimFlyingDown= 6;
             public const int AnimFlyingKick= 7;
             public const int AnimLand = 8;
-            
+            public const int AnimBlocking = 9;
+            public const int AnimWalking = 10;
             public Controle(float unite)
             {
                 this.unite = unite;
@@ -91,7 +92,7 @@ namespace Objets
             this.nbSauts = nbSauts;
             this.nbSautsMax = nbSauts;
             
-            etats = new Etats[]{new Etats(),new Etats(),new Etats(),new Etats(),new Etats(), new Etats(), };
+            etats = new Etats[]{new Etats(),new Etats(),new Etats(),new Etats(),new Etats(), new Etats(),new Etats(), };
         }
         
         #endregion
@@ -109,26 +110,31 @@ namespace Objets
 
         protected internal static (Controle c, Joueur j) keyHandeler(Controle c, Joueur j, Animator anim, Personnages.Personnages.Personnage p)
         {
-            if (j.isAlive && !j.etats[Joueur.stunned].actif)
-            {
-                if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif)
+            if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif)
                 {
                     //TODO
                 }
-                
-                if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif) //Attaque
+                if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif && !j.etats[Joueur.blocked].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
+                {
+                    j.etats[Joueur.blocked].setTimer(2f);
+                    j.etats[Joueur.invincibility].setTimer(0.25f);
+                    anim.Play(p.anim[Controle.AnimBlocking]);
+                    j.etats[Joueur.stunned].setTimer (0.3f);
+                }
+                if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque
                 {
                     anim.Play(p.anim[Controle.AnimHit]);
                     j.etats[Joueur.attacking].setTimer (0.5f);
-                    
+                    j.etats[Joueur.stunned].setTimer (0.3f);
                 }
-                if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif) //Attaque Haut
+                if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque Haut
                 {
-                    anim.Play(p.anim[Controle.AnimHitUp]);
+                    anim.Play(p.anim[Controle.AnimHitUp]);// change en kick
                     j.etats[Joueur.attacking].setTimer (0.5f);
+                    j.etats[Joueur.stunned].setTimer (0.3f);
                 }
                 
-                if (Input.GetKey(p.keys[Controle.Up]) && j.nbSauts > 0) //saut
+                if (Input.GetKey(p.keys[Controle.Up]) && j.nbSauts > 0 && j.isAlive && !j.etats[Joueur.stunned].actif) //saut
                 {
                     if (!c.upKeyAlreadyPressed)
                     {
@@ -152,7 +158,7 @@ namespace Objets
                 }
 
 
-                if (Input.GetKey(p.keys[Controle.Down])) //fastfall
+                if (Input.GetKey(p.keys[Controle.Down]) && j.isAlive && !j.etats[Joueur.stunned].actif) //fastfall
                 { 
                     {
                         if (j.Vitesse.y - c.unite * 2 > -j.vitessemax*2)
@@ -161,13 +167,13 @@ namespace Objets
                         }
                     }
 
-                    if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif)
+                    if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
                     {
                         anim.Play(p.anim[Controle.AnimHitDown]);
                         j.etats[Joueur.attacking].setTimer (1);
                     }
 
-                    if (!c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif) // accroupi
+                    if (!c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif) // accroupi
                     {
                         j.demiHauteur /= 2;
                         j.position.y -= j.demiHauteur;
@@ -187,18 +193,21 @@ namespace Objets
                     }
                 }
 
-                if (Input.GetKey(p.keys[Controle.Right])) //droite
+                if (Input.GetKey(p.keys[Controle.Right]) && j.isAlive && !j.etats[Joueur.stunned].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //droite
                 {
                     if (!c.rigthKeyAlreadyPressed)
                     {
                         j.Vitesse = new Vector2(j.Vitesse.x + c.unite, j.Vitesse.y);
                         c.rigthKeyAlreadyPressed = true;
-
                         if (j.direction == 180)
                         {
                             j.direction = 0;
                             j.localrotate = new Quaternion(0, j.direction, 0, 0);
                         }
+                    }
+                    if (!j.etats[Joueur.flying].actif)
+                    {
+                        anim.Play(p.anim[Controle.AnimWalking]);
                     }
                 }
                 else
@@ -210,7 +219,7 @@ namespace Objets
                     }
                 }
 
-                if (Input.GetKey(p.keys[Controle.Left])) //gauche
+                if (Input.GetKey(p.keys[Controle.Left]) && j.isAlive && !j.etats[Joueur.stunned].actif) //gauche
                 {
                     if (!c.leftKeyAlreadyPressed)
                     {
@@ -223,6 +232,11 @@ namespace Objets
                             j.localrotate = new Quaternion(0, j.direction, 0, 0);
                         }
                     }
+
+                    if (!j.etats[Joueur.flying].actif)
+                    {
+                        anim.Play(p.anim[Controle.AnimWalking]);
+                    }
                 }
                 else
                 {
@@ -232,9 +246,8 @@ namespace Objets
                         c.leftKeyAlreadyPressed = false;
                     }
                 }
-            }
 
-            return (c,j);
+                return (c,j);
         }
 
         protected internal static Joueur etatHandler(Joueur j, Personnages.Personnages.Personnage p,Animator anim)

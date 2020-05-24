@@ -25,10 +25,10 @@ namespace Personnages
 
         public static readonly Personnage perso1 = new Personnage(
             new []{"u", "i", "q", "d", "z", "s","o"}, 
-            new []{"Hit", "Kick", "Spike","Projectile","Jump","FlyingUp","FlyingDown","FlyingKick","Land"},
+            new []{"Hit", "Kick", "Spike","Projectile","Jump","FlyingUp","FlyingDown","FlyingKick","Land","Blocking","Walking"},
             new Vector2 (3f,0.5f),
             new Vector2 (3f,0.5f),
-            new Vector2 (3f,0.5f),
+            new Vector2 (3f,0.5f),// corriger
             new Vector2 (0.5f,0.5f)
             );
         

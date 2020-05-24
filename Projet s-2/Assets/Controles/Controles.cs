@@ -16,7 +16,7 @@ namespace Objets
         [SerializeField] protected internal int demiLargeur = 1;
         [SerializeField] protected internal int masse = 3;
         [SerializeField] protected internal int nbSauts = 3;
-        [SerializeField] protected internal float unite = (float)0.45;// mvspd perso
+        [SerializeField] protected internal float unite = (float)0.001;// mvspd perso
 
         protected internal Joueur j;
         protected internal Joueur.Controle c;

@@ -16,22 +16,22 @@ public class AttackHit2 : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Controles joueur2 = other.gameObject.GetComponent<Controles>();
-        Controles2 joueur = gameObject.GetComponentInParent<Controles2>();
-        if (joueur2 != null && !joueur2.j.etats[Joueur.invincibility].actif)
+        Controles joueur = other.gameObject.GetComponent<Controles>();
+        Controles2 joueur2 = gameObject.GetComponentInParent<Controles2>();
+        if (joueur != null && !joueur.j.etats[Joueur.invincibility].actif)
         {
-            if (joueur2.j.position.x - joueur.j.position.x > 0)
+            if (joueur.j.position.x - joueur2.j.position.x > 0)
             {
-                joueur2.j.directionProj = 1;
+                joueur.j.directionProj = 1;
             }
             else
             {
-                joueur2.j.directionProj = -1;
+                joueur.j.directionProj = -1;
             }
-            joueur2.j.etats[Joueur.stunned].setTimer (0.5f);
-            joueur2.j.etats[Joueur.knocked].setTimer (0.2f);
-            joueur2.j.Vitesse = new Vector3(joueur2.j.Vitesse.x, joueur2.j.Vitesse.y >0.3f? joueur2.j.Vitesse.y:0.3f, 0);
-            joueur2.j.estAttaque(20, 0.4f);
+            joueur.j.etats[Joueur.stunned].setTimer (0.5f);
+            joueur.j.etats[Joueur.knocked].setTimer (0.2f);
+            joueur.j.Vitesse = new Vector3(joueur.j.Vitesse.x, joueur.j.Vitesse.y >0.3f? joueur.j.Vitesse.y:0.3f, 0);
+            joueur.j.estAttaque(joueur.anim , joueur.p,10,0.4f);
         }
     }
 }

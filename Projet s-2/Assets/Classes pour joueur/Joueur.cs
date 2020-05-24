@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
+using UnityEditorInternal;
 using UnityEngine;
 /* Author : Julien Lung Yut Fong et Guillaume MERCIER
  *
@@ -52,6 +53,9 @@ namespace Objets
             public const int AnimLand = 8;
             public const int AnimBlocking = 9;
             public const int AnimWalking = 10;
+            public const int AnimGetHit = 11;
+            public const int AnimCrouching = 12;
+            public const int AnimCrouched = 13;
             public Controle(float unite)
             {
                 this.unite = unite;
@@ -99,155 +103,160 @@ namespace Objets
 
         #region Methodes
 
-        protected internal void estAttaque(int degats = 0, float dureeInv = 0.5f)//durée en sec
+        protected internal void estAttaque(Animator anim, Personnages.Personnages.Personnage p,int degats = 0, float dureeInv = 0.5f)//durée en sec
         {
             if (!etats[invincibility].actif)
             {
                 this.etats[invincibility].setTimer(dureeInv);
                 Pv -= degats;
+                anim.Play(p.anim[Controle.AnimGetHit]);
             }
         }
 
         protected internal static (Controle c, Joueur j) keyHandeler(Controle c, Joueur j, Animator anim, Personnages.Personnages.Personnage p)
         {
             if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif)
-                {
+            {
                     //TODO
-                }
-                if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif && !j.etats[Joueur.blocked].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
-                {
-                    j.etats[Joueur.blocked].setTimer(2f);
-                    j.etats[Joueur.invincibility].setTimer(0.25f);
-                    anim.Play(p.anim[Controle.AnimBlocking]);
-                    j.etats[Joueur.stunned].setTimer (0.3f);
-                }
-                if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque
-                {
-                    anim.Play(p.anim[Controle.AnimHit]);
-                    j.etats[Joueur.attacking].setTimer (0.5f);
-                    j.etats[Joueur.stunned].setTimer (0.3f);
-                }
-                if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque Haut
-                {
-                    anim.Play(p.anim[Controle.AnimHitUp]);// change en kick
-                    j.etats[Joueur.attacking].setTimer (0.5f);
-                    j.etats[Joueur.stunned].setTimer (0.3f);
-                }
+            }
+            if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif && !j.etats[Joueur.blocked].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
+            {
+                j.etats[Joueur.blocked].setTimer(2f);
+                j.etats[Joueur.invincibility].setTimer(0.25f);
+                anim.Play(p.anim[Controle.AnimBlocking]);
+                j.etats[Joueur.stunned].setTimer (0.3f);
+            }
+            if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque
+            {
+                anim.Play(p.anim[Controle.AnimHit]);
+                j.etats[Joueur.attacking].setTimer (0.5f);
+                j.etats[Joueur.stunned].setTimer (0.3f);
+            }
+            if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque Haut
+            {
+                anim.Play(p.anim[Controle.AnimHitUp]);// change en kick
+                j.etats[Joueur.attacking].setTimer (0.5f);
+                j.etats[Joueur.stunned].setTimer (0.35f);
+            }
                 
-                if (Input.GetKey(p.keys[Controle.Up]) && j.nbSauts > 0 && j.isAlive && !j.etats[Joueur.stunned].actif) //saut
+            if (Input.GetKey(p.keys[Controle.Up]) && j.nbSauts > 0 && j.isAlive && !j.etats[Joueur.stunned].actif) //saut
+            {
+                if (!c.upKeyAlreadyPressed)
                 {
-                    if (!c.upKeyAlreadyPressed)
-                    {
-                        anim.Play(p.anim[Controle.AnimJump]);
-                        j.Vitesse = new Vector2(j.Vitesse.x, c.unite);
-                        c.upKeyAlreadyPressed = true;
-                    }
+                    anim.Play(p.anim[Controle.AnimJump]);
+                    j.Vitesse = new Vector2(j.Vitesse.x, c.unite);
+                    c.upKeyAlreadyPressed = true;
                 }
-                else
+            }
+            else
+            {
+                if (c.upKeyAlreadyPressed)
                 {
-                    if (c.upKeyAlreadyPressed)
-                    {
-                        j.nbSauts--;
-                        c.upKeyAlreadyPressed = false;
-                    }
-
-                    if (j.position.y <= j.demiHauteur)
-                    {
-                        j.nbSauts = j.nbSautsMax;
-                    }
+                    j.nbSauts--;
+                    c.upKeyAlreadyPressed = false;
                 }
 
-
-                if (Input.GetKey(p.keys[Controle.Down]) && j.isAlive && !j.etats[Joueur.stunned].actif) //fastfall
-                { 
-                    {
-                        if (j.Vitesse.y - c.unite * 2 > -j.vitessemax*2)
-                        {
-                            j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - c.unite * 2);
-                        }
-                    }
-
-                    if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
-                    {
-                        anim.Play(p.anim[Controle.AnimHitDown]);
-                        j.etats[Joueur.attacking].setTimer (1);
-                    }
-
-                    if (!c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif) // accroupi
-                    {
-                        j.demiHauteur /= 2;
-                        j.position.y -= j.demiHauteur;
-                        j.localscale = new Vector3(j.localscale.x, j.localscale.y / 2);
-                        c.downKeyAlreadyPressed = true;
-                        j.etats[Joueur.crouched].setTimer (2);
-                    }
-                }
-                else
+                if (j.position.y <= j.demiHauteur)
                 {
-                    if (c.downKeyAlreadyPressed) // Reprendre forme normale
-                    {
-                        j.position.y += j.demiHauteur;
-                        j.demiHauteur *= 2;
-                        j.localscale = new Vector3(j.localscale.x, j.localscale.y * 2);
-                        c.downKeyAlreadyPressed = false;
-                    }
+                    j.nbSauts = j.nbSautsMax;
                 }
+            }
 
-                if (Input.GetKey(p.keys[Controle.Right]) && j.isAlive && !j.etats[Joueur.stunned].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //droite
+
+            if (Input.GetKey(p.keys[Controle.Down]) && j.isAlive && !j.etats[Joueur.stunned].actif) //fastfall
+            { 
                 {
-                    if (!c.rigthKeyAlreadyPressed)
+                    if (j.Vitesse.y - c.unite * 2 > -j.vitessemax*2)
                     {
-                        j.Vitesse = new Vector2(j.Vitesse.x + c.unite, j.Vitesse.y);
-                        c.rigthKeyAlreadyPressed = true;
-                        if (j.direction == 180)
-                        {
-                            j.direction = 0;
-                            j.localrotate = new Quaternion(0, j.direction, 0, 0);
-                        }
-                    }
-                    if (!j.etats[Joueur.flying].actif)
-                    {
-                        anim.Play(p.anim[Controle.AnimWalking]);
+                        j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - c.unite * 2);
                     }
                 }
-                else
+
+                if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
                 {
-                    if (c.rigthKeyAlreadyPressed)
-                    {
-                        j.Vitesse = new Vector2(j.Vitesse.x - c.unite, j.Vitesse.y);
-                        c.rigthKeyAlreadyPressed = false;
-                    }
+                    anim.Play(p.anim[Controle.AnimHitDown]);
+                    j.etats[Joueur.attacking].setTimer (1);
                 }
 
-                if (Input.GetKey(p.keys[Controle.Left]) && j.isAlive && !j.etats[Joueur.stunned].actif) //gauche
+                if (!c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif) // accroupi
                 {
-                    if (!c.leftKeyAlreadyPressed)
+                    j.demiHauteur /= 2;
+                    j.position.y -= j.demiHauteur;
+                    j.localscale = new Vector3(j.localscale.x, j.localscale.y / 2);
+                    c.downKeyAlreadyPressed = true;
+                    if (!j.etats[Joueur.crouched].actif)
                     {
-                        j.Vitesse = new Vector2(j.Vitesse.x - c.unite, j.Vitesse.y);
-                        c.leftKeyAlreadyPressed = true;
-
-                        if (j.direction == 0)
-                        {
-                            j.direction = 180;
-                            j.localrotate = new Quaternion(0, j.direction, 0, 0);
-                        }
+                        anim.Play(p.anim[Controle.AnimCrouching]);
                     }
-
-                    if (!j.etats[Joueur.flying].actif)
-                    {
-                        anim.Play(p.anim[Controle.AnimWalking]);
-                    }
+                    j.etats[Joueur.crouched].setTimer (Time.fixedDeltaTime*2);
                 }
-                else
+            }
+            else
+            {
+                if (c.downKeyAlreadyPressed) // Reprendre forme normale
                 {
-                    if (c.leftKeyAlreadyPressed)
+                    j.position.y += j.demiHauteur;
+                    j.demiHauteur *= 2;
+                    j.localscale = new Vector3(j.localscale.x, j.localscale.y * 2);
+                    c.downKeyAlreadyPressed = false;
+                }
+            }
+
+            if (Input.GetKey(p.keys[Controle.Right]) && j.isAlive && !j.etats[Joueur.stunned].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //droite
+            {
+                if (!c.rigthKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x + c.unite, j.Vitesse.y);
+                    c.rigthKeyAlreadyPressed = true;
+                    if (j.direction == 180)
                     {
-                        j.Vitesse = new Vector2(j.Vitesse.x + c.unite, j.Vitesse.y);
-                        c.leftKeyAlreadyPressed = false;
+                        j.direction = 0;
+                        j.localrotate = new Quaternion(0, j.direction, 0, 0);
+                    }
+                }
+                if (!j.etats[Joueur.flying].actif&& !j.etats[crouched].actif)
+                {
+                    anim.Play(p.anim[Controle.AnimWalking]);
+                }
+            }
+            else
+            {
+                if (c.rigthKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x - c.unite, j.Vitesse.y);
+                    c.rigthKeyAlreadyPressed = false;
+                }
+            }
+
+            if (Input.GetKey(p.keys[Controle.Left]) && j.isAlive && !j.etats[Joueur.stunned].actif) //gauche
+            {
+                if (!c.leftKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x - c.unite, j.Vitesse.y);
+                    c.leftKeyAlreadyPressed = true;
+
+                    if (j.direction == 0)
+                    {
+                        j.direction = 180;
+                        j.localrotate = new Quaternion(0, j.direction, 0, 0);
                     }
                 }
 
-                return (c,j);
+                if (!j.etats[Joueur.flying].actif && !j.etats[crouched].actif)
+                {
+                    anim.Play(p.anim[Controle.AnimWalking]);
+                }
+            }
+            else
+            {
+                if (c.leftKeyAlreadyPressed)
+                {
+                    j.Vitesse = new Vector2(j.Vitesse.x + c.unite, j.Vitesse.y);
+                    c.leftKeyAlreadyPressed = false;
+                }
+            }
+
+            return (c,j);
         }
 
         protected internal static Joueur etatHandler(Joueur j, Personnages.Personnages.Personnage p,Animator anim)
@@ -259,6 +268,10 @@ namespace Objets
             if (j.etats[Joueur.flying].actif && j.Vitesse.y>0)
             {
                 anim.Play(p.anim[Controle.AnimFlyingUp]);
+            }
+            if (j.etats[Joueur.crouched].actif)
+            {
+                anim.Play(p.anim[Controle.AnimCrouched]);
             }
             else if (j.etats[Joueur.flying].actif && j.Vitesse.y<0)
             {

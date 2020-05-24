@@ -18,7 +18,7 @@ public class AttackHitSPIKE2 : MonoBehaviour
         if (joueur != null)
         {
             joueur.j.Vitesse = new Vector3(joueur.j.Vitesse.x, - 2, 0);
-            joueur.j.estAttaque(20, 0.4f);
+            joueur.j.estAttaque(joueur.anim , joueur.p,10,0.4f);
         }
     }
 }

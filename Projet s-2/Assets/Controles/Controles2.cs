@@ -25,7 +25,6 @@ namespace Objets
         protected internal Animator anim;
 
 
-        //Ici on va rajouter les états, pour savoir on peut faire quoi dans chaque état, par exemple pour les attaques
          // Start is called before the first frame update
         void Awake()
         {

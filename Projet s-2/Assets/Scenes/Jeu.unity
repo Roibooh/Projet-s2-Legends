@@ -473,7 +473,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 15, z: -10}
+  m_LocalPosition: {x: 0, y: 18.24, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -490,7 +490,7 @@ GameObject:
   - component: {fileID: 694849633}
   - component: {fileID: 694849632}
   m_Layer: 0
-  m_Name: pixil-layer-Background (1) (1)
+  m_Name: Map 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -554,8 +554,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 694849631}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.013, y: 14.96, z: 0}
-  m_LocalScale: {x: 1.4689846, y: 1.5061594, z: 1}
+  m_LocalPosition: {x: -0.013, y: 18.28, z: 0}
+  m_LocalScale: {x: 1.4036236, y: 1.5061594, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
@@ -1059,7 +1059,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1029480508}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -31.208, y: 6.106, z: 0}
+  m_LocalPosition: {x: -30.84, y: 6.106, z: 0}
   m_LocalScale: {x: 3.7, y: 3.8, z: 0}
   m_Children:
   - {fileID: 1850284198}
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nom: Test
   pv: 100
-  demiHauteur: 2
+  demiHauteur: 5
   demiLargeur: 1
   masse: 3
   nbSauts: 3
@@ -1118,7 +1118,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.09134102, y: -0.019572973}
+  m_Offset: {x: 0.09134102, y: -0.040404737}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1129,7 +1129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.182682, y: 2.552794}
+  m_Size: {x: 1.182682, y: 2.5769992}
   m_EdgeRadius: 0
 --- !u!114 &1029480514
 MonoBehaviour:
@@ -1337,7 +1337,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nom: Test
   pv: 100
-  demiHauteur: 2
+  demiHauteur: 4
   demiLargeur: 1
   masse: 3
   nbSauts: 3
@@ -1399,8 +1399,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364515096}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.43, y: 3.86, z: 0}
+  m_LocalRotation: {x: 0, y: -1, z: 0, w: 0}
+  m_LocalPosition: {x: -0.43, y: 8.01, z: 0}
   m_LocalScale: {x: 3.7, y: 3.8, z: 1}
   m_Children:
   - {fileID: 968331394}
@@ -1408,7 +1408,7 @@ Transform:
   - {fileID: 895877338}
   m_Father: {fileID: 0}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
 --- !u!114 &1364515100
 MonoBehaviour:
   m_ObjectHideFlags: 0

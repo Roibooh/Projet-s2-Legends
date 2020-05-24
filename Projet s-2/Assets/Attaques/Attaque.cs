@@ -28,7 +28,8 @@ namespace Objets
 
         protected internal void hit(Joueur cible)
         {
-            cible.estAttaque(this.degatsAttaque);
+            // TODO
+            
         }
 
         #endregion

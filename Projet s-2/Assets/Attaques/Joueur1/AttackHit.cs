@@ -31,7 +31,7 @@ public class AttackHit : MonoBehaviour
             joueur2.j.etats[Joueur.stunned].setTimer (0.5f);
             joueur2.j.etats[Joueur.knocked].setTimer (0.5f);
             joueur2.j.Vitesse =  new Vector3(joueur2.j.Vitesse.x,joueur2.j.Vitesse.y >0.3f? joueur2.j.Vitesse.y:0.3f,0);
-            joueur2.j.estAttaque(100,0.4f);
+            joueur2.j.estAttaque(joueur2.anim , joueur2.p,100,0.4f);
         }
     }
 }

@@ -45,8 +45,7 @@ namespace Objets
 
             transform.position = j.UpdatePositionJoueur();
             transform.localScale = j.localscale;
-            transform.localRotation = j.localrotate;
-            
+
             #endregion
 
             #region GestionEtats

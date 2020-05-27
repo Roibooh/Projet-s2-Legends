@@ -13,6 +13,7 @@ public class Player2 : MonoBehaviour
     private Stat health;
     private Controles2 joueur2;
     private Text winj1;
+    private bool wadDead = false;
 
     private void Awake()
     {
@@ -27,7 +28,12 @@ public class Player2 : MonoBehaviour
         if (!joueur2.j.isAlive )    
         {
             joueur2.j.demiHauteur = 0.25f;
-            joueur2.j.localrotate = new Quaternion(joueur2.j.localrotate.z + 90,15,-90,0);
+            if (!wadDead)
+            {
+                joueur2.transform.Rotate(0,0,90);
+                joueur2.j.localrotate = joueur2.transform.rotation;
+                wadDead = true;
+            }
             
             // WIN JOUEUR 1
         }

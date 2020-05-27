@@ -25,7 +25,7 @@ namespace Personnages
 
         public static readonly Personnage perso1 = new Personnage(
             new []{KeyCode.Q, KeyCode.D, KeyCode.Z, KeyCode.S,KeyCode.U, KeyCode.I,KeyCode.O}, 
-            new []{"Hit", "Kick", "Spike","Projectile","Jump","FlyingUp","FlyingDown","LowKick","Land","Blocking","Walking","GetHit","Crouching","Crouched","Decrouch"},
+            new []{"Hit", "Kick", "Spike","Projectile","Jump","FlyingUp","FlyingDown","LowKick","Land","Blocking","Walking","GetHit","Crouching","Crouched","Decrouch","Mort"},
             new Vector2 (3f,0.5f),
             new Vector2 (3f,0.5f),
             new Vector2 (3f,0.5f),// corriger
@@ -34,10 +34,10 @@ namespace Personnages
         
         public static readonly Personnage perso2 = new Personnage(
             new []{KeyCode.LeftArrow,KeyCode.RightArrow,KeyCode.UpArrow,KeyCode.DownArrow,KeyCode.Keypad1, KeyCode.Keypad2,KeyCode.Keypad3}, 
-            new []{"HitShort", "Hitup", "Spike","Projectile"},
-            new Vector2 (1f,0.5f),
-            new Vector2 (0.5f,1f),
-            new Vector2 (0.5f,1f),
+            new []{"Hit", "Kick", "Spike","Projectile","Jump","FlyingUp","FlyingDown","LowKick","Land","Blocking","Walking","GetHit","Crouching","Crouched","Decrouch","Mort"},
+            new Vector2 (3f,0.5f),
+            new Vector2 (3f,0.5f),
+            new Vector2 (3f,0.5f),// corriger
             new Vector2 (0.5f,0.5f)
             );
     }

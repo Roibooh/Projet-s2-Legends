@@ -9,7 +9,7 @@ namespace Objets
     public class Etats
     {
         protected internal bool actif;
-        private int timer;
+        protected internal int timer;
 
         public void setTimer(float time)
         {

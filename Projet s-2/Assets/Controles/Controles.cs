@@ -49,7 +49,7 @@ namespace Objets
             (c,j)=Joueur.keyHandeler(c,j,anim,p);
 
             transform.position = j.UpdatePositionJoueur();
-            transform.localScale = j.localscale; 
+            transform.localScale = j.localscale;
             transform.localRotation = j.localrotate;
             
             #endregion

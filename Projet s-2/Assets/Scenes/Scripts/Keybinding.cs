@@ -66,10 +66,11 @@ public class Keybinding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (newKey.ToString() != "")
+        if (newKey.ToString() != "" && waitingKey)
         {
             listp[keynum] = newKey;
             text.text = listp[keynum].ToString().ToLower();
+            waitingKey = false;
         }
     }
 }

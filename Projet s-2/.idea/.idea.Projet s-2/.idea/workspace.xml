@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d06018ab-c67f-43c1-ad19-656a5529bc23" name="Default Changelist" comment="" />
+    <list default="true" id="d06018ab-c67f-43c1-ad19-656a5529bc23" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Projet s-2/.idea/indexLayout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Projet s-2/.idea/indexLayout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Projet s-2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Projet s-2/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Personnages/Personnage.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Personnages/Personnage.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Scripts/Keybinding.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Scripts/Keybinding.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/ArtifactDB" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ArtifactDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/Library/CurrentMaximizeLayout.dwlt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/LastBuild.buildreport" beforeDir="false" afterPath="$PROJECT_DIR$/Library/LastBuild.buildreport" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/Unity.TextMeshPro.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/Unity.TextMeshPro.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/Unity.Timeline.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/Unity.Timeline.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/UnityEngine.UI.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/Managed/UnityEngine.UI.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/globalgamemanagers" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/globalgamemanagers" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/level0" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/level0" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/level1" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/level1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/level2" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/level2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/sharedassets1.assets" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/Data/sharedassets1.assets" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/ScriptsOnlyCache.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/Library/PlayerDataCache/Win64/ScriptsOnlyCache.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Library/ScriptAssemblies/Assembly-CSharp.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/SourceAssetDB" beforeDir="false" afterPath="$PROJECT_DIR$/Library/SourceAssetDB" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/StateCache/Hierarchy/d5e1be-mainStage.json" beforeDir="false" afterPath="$PROJECT_DIR$/Library/StateCache/Hierarchy/d5e1be-mainStage.json" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,6 +43,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/HUD/CountdownController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/TextMesh Pro/Resources/Shaders/TMP_SDF-Mobile Masking.shader" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Classes pour joueur/Stat.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Classes pour joueur/Objets.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/HUD/BarScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Attaques/Joueur2/AttackHitUP2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scenes/Scripts/Parametres.cs" root0="FORCE_HIGHLIGHTING" />
@@ -55,18 +78,18 @@
         <option value="$PROJECT_DIR$/Assets/HUD/Player.cs" />
         <option value="$PROJECT_DIR$/Assets/HUD/Player2.cs" />
         <option value="$PROJECT_DIR$/Assets/Classes pour joueur/ObjetsStatiques.cs" />
-        <option value="$PROJECT_DIR$/Assets/Personnages/Personnage.cs" />
         <option value="$PROJECT_DIR$/Assets/Classes pour joueur/Etats.cs" />
         <option value="$PROJECT_DIR$/Assets/Attaques/Joueur1/AttackHitUP.cs" />
         <option value="$PROJECT_DIR$/Assets/Attaques/Joueur2/AttackHitSPIKE2.cs" />
         <option value="$PROJECT_DIR$/Assets/Attaques/Joueur1/AttackHitSPIKE.cs" />
         <option value="$PROJECT_DIR$/Assets/Attaques/Joueur2/AttackHit2.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/Scripts/Parametres.cs" />
-        <option value="$PROJECT_DIR$/Assets/Scenes/Scripts/Keybinding.cs" />
         <option value="$PROJECT_DIR$/Assets/Scenes/Scripts/EchapMenu.cs" />
         <option value="$PROJECT_DIR$/Assets/Classes pour joueur/Joueur.cs" />
         <option value="$PROJECT_DIR$/Assets/Attaques/Joueur1/AttackHit.cs" />
         <option value="$PROJECT_DIR$/Assets/Controles/Controles.cs" />
+        <option value="$PROJECT_DIR$/Assets/Personnages/Personnage.cs" />
+        <option value="$PROJECT_DIR$/Assets/Scenes/Scripts/Keybinding.cs" />
       </list>
     </option>
   </component>
@@ -117,6 +140,7 @@
       <workItem from="1590581352480" duration="18503000" />
       <workItem from="1590607460560" duration="432000" />
       <workItem from="1590612393862" duration="511000" />
+      <workItem from="1590613769602" duration="2122000" />
     </task>
     <servers />
   </component>

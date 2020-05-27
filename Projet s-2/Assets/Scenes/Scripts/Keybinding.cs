@@ -14,9 +14,9 @@ public class Keybinding : MonoBehaviour
     private Transform menu;
     private Text text;
     private Event keyEvent;
-    private KeyCode newKey;
+    private string newKey;
     private bool waitingKey;
-    private KeyCode[] listp;
+    private string[] listp;
     private int keynum;
     // Start is called before the first frame update
     void OnEnable()
@@ -33,7 +33,7 @@ public class Keybinding : MonoBehaviour
         }
         for (int i = 2; i < 9; i++)
         {
-            menu.GetChild(i).GetComponentInChildren<Text>().text = listp[i - 2].ToString().ToLower();
+            menu.GetChild(i).GetComponentInChildren<Text>().text = listp[i - 2];
         }
     }
 
@@ -44,7 +44,7 @@ public class Keybinding : MonoBehaviour
         keyEvent = Event.current;
         if (keyEvent.isKey && waitingKey )
         {
-            newKey = keyEvent.keyCode;
+            newKey = keyEvent.keyCode.ToString().ToLower();
             waitingKey = false;
         }
     }
@@ -66,11 +66,11 @@ public class Keybinding : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (newKey.ToString() != "" && waitingKey)
+        if (newKey != "" )
         {
             listp[keynum] = newKey;
-            text.text = listp[keynum].ToString().ToLower();
-            waitingKey = false;
+            text.text = listp[keynum];
+            newKey = "";
         }
     }
 }

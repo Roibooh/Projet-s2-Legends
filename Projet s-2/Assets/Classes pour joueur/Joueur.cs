@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Tracing;
+using System.Runtime.InteropServices;
 using UnityEditorInternal;
 using UnityEngine;
 /* Author : Julien Lung Yut Fong et Guillaume MERCIER
@@ -11,7 +12,42 @@ namespace Objets
     public class Joueur : ObjetsMovibles
     {
         #region Attributs
+        public class Controle
+        {
+            protected internal bool upKeyAlreadyPressed = false;
+            protected internal bool leftKeyAlreadyPressed = false;
+            protected internal bool rigthKeyAlreadyPressed = false;
+            protected internal bool downKeyAlreadyPressed = false;
+            protected internal bool isShooting = false;
+            protected internal float unite;
 
+            public const int Left = 0;
+            public const int Right = 1;
+            public const int Up = 2;
+            public const int Down = 3;
+            public const int Hit = 4;
+            public const int HitUp = 5;
+            public const int Projectile = 6;
+
+            public const int AnimHit = 0;
+            public const int AnimHitUp = 1;
+            public const int AnimHitDown = 2;
+            public const int AnimJump = 4;
+            public const int AnimFlyingUp = 5;
+            public const int AnimFlyingDown= 6;
+            public const int AnimLowkick = 7;
+            public const int AnimLand = 8;
+            public const int AnimBlocking = 9;
+            public const int AnimWalking = 10;
+            public const int AnimGetHit = 11;
+            public const int AnimCrouching = 12;
+            public const int AnimCrouched = 13;
+            public const int AnimDecrouch = 14;
+            public  Controle(float unite)
+            {
+                this.unite = unite;
+            }
+        }
         private string nom;
         public int pv;
         private int pvMax;
@@ -26,42 +62,7 @@ namespace Objets
         protected internal const int flying = 4;
         protected internal const int attacking = 5;
         protected internal const int blocked = 6;
-        public class Controle
-        {
-            protected internal bool upKeyAlreadyPressed = false;
-            protected internal bool leftKeyAlreadyPressed = false;
-            protected internal bool rigthKeyAlreadyPressed = false;
-            protected internal bool downKeyAlreadyPressed = false;
-            protected internal bool isShooting = false;
-            protected internal float unite;
-            
-            public const int Hit = 0;
-            public const int HitUp = 1;
-            public const int Left = 2;
-            public const int Right = 3;
-            public const int Up = 4;
-            public const int Down = 5;
-            public const int Projectile = 6;
 
-            public const int AnimHit = 0;
-            public const int AnimHitUp = 1;
-            public const int AnimHitDown = 2;
-            public const int AnimJump = 4;
-            public const int AnimFlyingUp = 5;
-            public const int AnimFlyingDown= 6;
-            public const int AnimFlyingKick= 7;
-            public const int AnimLand = 8;
-            public const int AnimBlocking = 9;
-            public const int AnimWalking = 10;
-            public const int AnimGetHit = 11;
-            public const int AnimCrouching = 12;
-            public const int AnimCrouched = 13;
-            public Controle(float unite)
-            {
-                this.unite = unite;
-            }
-        }
-        
         public int Pv
         {
             get => pv;
@@ -95,7 +96,6 @@ namespace Objets
             this.pvMax = pv;
             this.nbSauts = nbSauts;
             this.nbSautsMax = nbSauts;
-            
             etats = new Etats[]{new Etats(),new Etats(),new Etats(),new Etats(),new Etats(), new Etats(),new Etats(), };
         }
         
@@ -114,31 +114,7 @@ namespace Objets
         }
 
         protected internal static (Controle c, Joueur j) keyHandeler(Controle c, Joueur j, Animator anim, Personnages.Personnages.Personnage p)
-        {
-            if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif)
-            {
-                    //TODO
-            }
-            if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif && !j.etats[Joueur.blocked].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
-            {
-                j.etats[Joueur.blocked].setTimer(2f);
-                j.etats[Joueur.invincibility].setTimer(0.25f);
-                anim.Play(p.anim[Controle.AnimBlocking]);
-                j.etats[Joueur.stunned].setTimer (0.3f);
-            }
-            if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque
-            {
-                anim.Play(p.anim[Controle.AnimHit]);
-                j.etats[Joueur.attacking].setTimer (0.5f);
-                j.etats[Joueur.stunned].setTimer (0.3f);
-            }
-            if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque Haut
-            {
-                anim.Play(p.anim[Controle.AnimHitUp]);// change en kick
-                j.etats[Joueur.attacking].setTimer (0.5f);
-                j.etats[Joueur.stunned].setTimer (0.35f);
-            }
-                
+        {    
             if (Input.GetKey(p.keys[Controle.Up]) && j.nbSauts > 0 && j.isAlive && !j.etats[Joueur.stunned].actif) //saut
             {
                 if (!c.upKeyAlreadyPressed)
@@ -162,7 +138,7 @@ namespace Objets
                 }
             }
 
-
+            
             if (Input.GetKey(p.keys[Controle.Down]) && j.isAlive && !j.etats[Joueur.stunned].actif) //fastfall
             { 
                 {
@@ -171,34 +147,32 @@ namespace Objets
                         j.Vitesse = new Vector2(j.Vitesse.x, j.Vitesse.y - c.unite * 2);
                     }
                 }
-
-                if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
-                {
-                    anim.Play(p.anim[Controle.AnimHitDown]);
-                    j.etats[Joueur.attacking].setTimer (1);
-                }
-
                 if (!c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif && j.isAlive && !j.etats[Joueur.stunned].actif) // accroupi
                 {
-                    j.demiHauteur /= 2;
-                    j.position.y -= j.demiHauteur;
-                    j.localscale = new Vector3(j.localscale.x, j.localscale.y / 2);
                     c.downKeyAlreadyPressed = true;
-                    if (!j.etats[Joueur.crouched].actif)
+
+                    if (!j.etats[Joueur.crouched].actif && !j.etats[Joueur.attacking].actif && !j.etats[Joueur.stunned].actif)
                     {
                         anim.Play(p.anim[Controle.AnimCrouching]);
+                        j.etats[Joueur.stunned].setTimer(0.15f);
+                        j.etats[Joueur.crouched].addTimer(Time.fixedDeltaTime*2);
                     }
-                    j.etats[Joueur.crouched].setTimer (Time.fixedDeltaTime*2);
+                }
+                else if(c.downKeyAlreadyPressed && !j.etats[Joueur.flying].actif && j.isAlive )
+                {
+                    j.etats[Joueur.crouched].addTimer(0.1f);
                 }
             }
             else
             {
                 if (c.downKeyAlreadyPressed) // Reprendre forme normale
                 {
-                    j.position.y += j.demiHauteur;
-                    j.demiHauteur *= 2;
-                    j.localscale = new Vector3(j.localscale.x, j.localscale.y * 2);
                     c.downKeyAlreadyPressed = false;
+                    if (!j.etats[Joueur.attacking].actif)
+                    {
+                        anim.Play(p.anim[Controle.AnimDecrouch]);
+                        j.etats[Joueur.stunned].setTimer(0.1f);
+                    }
                 }
             }
 
@@ -255,7 +229,32 @@ namespace Objets
                     c.leftKeyAlreadyPressed = false;
                 }
             }
-
+            
+            if (Input.GetKey((p.keys[Controle.Projectile])) && !j.etats[Joueur.attacking].actif && !j.etats[Joueur.blocked].actif && j.isAlive && !j.etats[Joueur.stunned].actif)
+            {
+                j.etats[Joueur.blocked].setTimer(2f);
+                j.etats[Joueur.invincibility].setTimer(0.25f);
+                anim.Play(p.anim[Controle.AnimBlocking]);
+                j.etats[Joueur.stunned].setTimer (0.3f);
+            }
+            if (Input.GetKey(p.keys[Controle.Hit])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque
+            {
+                anim.Play(p.anim[Controle.AnimHit]);
+                j.etats[Joueur.attacking].setTimer (0.5f);
+                j.etats[Joueur.stunned].setTimer (0.3f);
+            }
+            if(Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif&& j.isAlive && !j.etats[Joueur.stunned].actif&& j.etats[crouched].actif)
+            {
+                anim.Play(p.anim[Controle.AnimLowkick]);
+                j.etats[Joueur.attacking].setTimer (1);
+                j.etats[Joueur.stunned].setTimer (0.3f);
+            }
+            else if (Input.GetKey(p.keys[Controle.HitUp])&& !j.etats[Joueur.attacking].actif && j.isAlive && !j.etats[Joueur.stunned].actif) //Attaque Haut
+            {
+                anim.Play(p.anim[Controle.AnimHitUp]);// change en kick
+                j.etats[Joueur.attacking].setTimer (0.5f);
+                j.etats[Joueur.stunned].setTimer (0.35f);
+            }
             return (c,j);
         }
 
@@ -267,9 +266,9 @@ namespace Objets
             }
             if (j.etats[Joueur.flying].actif && j.Vitesse.y>0)
             {
-                anim.Play(p.anim[Controle.AnimFlyingUp]);
+                
             }
-            if (j.etats[Joueur.crouched].actif)
+            else if (j.etats[Joueur.crouched].actif)
             {
                 anim.Play(p.anim[Controle.AnimCrouched]);
             }

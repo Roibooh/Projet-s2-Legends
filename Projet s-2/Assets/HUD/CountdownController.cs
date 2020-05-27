@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 /* Author : Stefano Mancinelli
  *
  * Classe du conteur
@@ -34,6 +35,7 @@ public class CountdownController : MonoBehaviour
     yield return new WaitForSeconds(1F);
     
     countdownDisplay.gameObject.SetActive(false);
+    SceneManager.LoadScene(0);
   }
   
 }

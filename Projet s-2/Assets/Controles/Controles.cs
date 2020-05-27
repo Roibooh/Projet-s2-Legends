@@ -38,22 +38,23 @@ namespace Objets
         // Update is called once per frame
         void FixedUpdate()
         {
+            #region GestionEtats
+            
+            j = Joueur.etatHandler(j,p,anim);
+            
+            #endregion
 
             #region GestionTouches
 
             (c,j)=Joueur.keyHandeler(c,j,anim,p);
 
             transform.position = j.UpdatePositionJoueur();
-            transform.localScale = j.localscale;
+            transform.localScale = j.localscale; 
             transform.localRotation = j.localrotate;
             
             #endregion
 
-            #region GestionEtats
             
-            j = Joueur.etatHandler(j,p,anim);
-            
-            #endregion
         }
     }
 }

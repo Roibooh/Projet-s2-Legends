@@ -19,6 +19,11 @@ namespace Objets
                  timer = t;
              }
         }
+        public void addTimer(float time)
+        {
+            int t = Convert.ToInt32(time/Time.fixedDeltaTime);
+            timer += t;
+        }
 
         public int Timer
         {

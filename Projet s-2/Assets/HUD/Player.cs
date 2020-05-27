@@ -28,8 +28,6 @@ public class Player : MonoBehaviour
         {
             joueur.j.demiHauteur = 0.25f;
             joueur.j.localrotate = new Quaternion(joueur.j.localrotate.z + 90,15,-90,0);
-
-            
             // WIN JOUEUR 2
         }
     }
